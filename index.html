@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gia phả họ Võ</title>
+<style>
+  :root{--nen:#f7efdc;--giay:#fffaf0;--chu:#2b2118;--phu:#7a6248;--do:#8e1b1b;--do-dam:#5e0f0f;--vang:#b8862b;--vang-nhat:#e9cf8f;
+        --nam:#1f4e79;--nu:#9b3a5f;--mat:#5f5a52;--duong:#b8862b}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--chu);font-family:"Segoe UI",Roboto,Arial,sans-serif;
+       background:var(--nen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23e3d2a8' stroke-width='1.2'%3E%3Cpath d='M0 40h20v-20h40v40h-20v-20'/%3E%3Cpath d='M40 0v10M40 70v10M0 0h10M70 80h10'/%3E%3C/g%3E%3C/svg%3E")}
+  .trang{max-width:1400px;margin:14px auto;background:var(--giay);position:relative;padding:26px 22px 30px;
+         border:3px double var(--vang);outline:6px solid var(--do);outline-offset:4px;box-shadow:0 10px 30px rgba(94,15,15,.18)}
+  .goc{position:absolute;width:74px;height:74px}
+  .goc.tt{top:4px;left:4px}.goc.tp{top:4px;right:4px;transform:scaleX(-1)}
+  .goc.dt{bottom:4px;left:4px;transform:scaleY(-1)}.goc.dp{bottom:4px;right:4px;transform:scale(-1,-1)}
+  header{text-align:center;padding:4px 70px 0}
+  .dong-chu-han{font-family:"Times New Roman",serif;color:var(--vang);font-size:16px;font-style:italic}
+  h1{margin:6px 0 2px;font-family:"Times New Roman",serif;color:var(--do);font-size:40px;letter-spacing:1px;
+     text-shadow:0 1px 0 #fff,0 2px 0 var(--vang-nhat)}
+  .tien-so{font-family:"Times New Roman",serif;font-style:italic;color:var(--do-dam);font-size:18px}
+  .que{color:var(--phu);font-size:15px;margin-top:2px}
+  .hoa-van{display:block;margin:10px auto 6px;width:min(520px,90%);height:30px}
+  .nguoi-lap{font-size:14px;color:var(--phu)} .nguoi-lap b{color:var(--do-dam)}
+  .ban-nhap{font-size:12px;color:var(--phu);margin-top:4px}
+  .thanh{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:12px 8px 4px}
+  button{border:1px solid var(--vang);background:#fff;color:var(--do-dam);padding:6px 14px;border-radius:999px;cursor:pointer;font-size:14px}
+  button:hover{background:var(--vang-nhat)}
+  .khung{overflow:auto;padding:16px 8px 30px}
+  .cay{transform-origin:top center;display:inline-block;min-width:100%;text-align:center}
+  /* Cây dạng ul/li có nét nối */
+  .cay ul{padding-top:24px;position:relative;display:flex;justify-content:center;margin:0;padding-left:0}
+  .cay li{list-style:none;position:relative;padding:24px 6px 0;text-align:center}
+  .cay li::before,.cay li::after{content:"";position:absolute;top:0;right:50%;border-top:2px solid var(--duong);width:50%;height:24px}
+  .cay li::after{right:auto;left:50%;border-left:2px solid var(--duong)}
+  .cay li:only-child::before,.cay li:only-child::after{display:none}
+  .cay li:only-child{padding-top:0}
+  .cay li:first-child::before,.cay li:last-child::after{border:0 none}
+  .cay li:last-child::before{border-right:2px solid var(--duong);border-radius:0 8px 0 0}
+  .cay li:first-child::after{border-radius:8px 0 0 0}
+  .cay ul ul::before{content:"";position:absolute;top:0;left:50%;border-left:2px solid var(--duong);height:24px}
+  .cay > ul{padding-top:0}
+  .cay > ul > li{padding-top:0}
+  .cay > ul > li::before,.cay > ul > li::after{display:none}
+  .doi{display:inline-flex;flex-direction:column;align-items:center;gap:2px}
+  .chi{font-size:11px;font-weight:700;color:#fff;background:var(--do);border-radius:999px;padding:1px 10px;letter-spacing:.5px}
+  .cap{display:inline-flex;gap:4px;background:linear-gradient(#fbf1d8,#f3e2b6);border:1px solid var(--vang);border-radius:12px;padding:4px}
+  .nguoi{background:#fff;border:2px solid var(--vang-nhat);border-top-width:4px;border-radius:9px;padding:6px 10px;min-width:118px;max-width:170px;
+         cursor:pointer;font-size:13px;line-height:1.35;transition:transform .15s,box-shadow .15s}
+  .nguoi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(94,15,15,.2)}
+  .nguoi.nam{border-top-color:var(--nam)} .nguoi.nu{border-top-color:var(--nu)}
+  .nguoi.da-mat{background:#f1ede4}
+  .nguoi .ten{font-weight:700;font-size:14px}
+  .nguoi.nam .ten{color:var(--nam)} .nguoi.nu .ten{color:var(--nu)}
+  .nguoi .nam-sinh{color:var(--phu)}
+  .nguoi .gio{color:var(--do);font-weight:600;margin-top:2px}
+  .the-doi{font-size:11px;color:var(--phu)}
+  .rong{max-width:580px;margin:20px auto;background:#fff;border:1px solid var(--vang);border-radius:12px;padding:20px;line-height:1.7}
+  section.bang{max-width:900px;margin:0 auto 10px;padding:0 8px}
+  h2{font-family:"Times New Roman",serif;color:var(--do);font-size:22px;text-align:center}
+  table{width:100%;border-collapse:collapse;background:#fff}
+  th,td{border:1px solid var(--vang-nhat);padding:6px 8px;font-size:14px;text-align:left}
+  th{background:var(--do);color:#fff}
+  tr:nth-child(even) td{background:#fdf6e6}
+  #chiTiet{position:fixed;right:16px;bottom:16px;max-width:330px;background:#fff;border:2px solid var(--vang);border-radius:12px;padding:14px;
+           box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;font-size:14px;line-height:1.55}
+  #chiTiet b{color:var(--do)}
+  .canh-bao{color:#8a5300;font-size:13px;text-align:center}
+  .truc-tuyen{display:none} .co-mang .truc-tuyen{display:inline-block}
+  button.chinh{background:var(--do);color:#fff;border-color:var(--do)} button.chinh:hover{background:var(--do-dam)}
+  .man{position:fixed;inset:0;background:rgba(43,33,24,.55);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:16px;z-index:9}
+  .man.mo{display:flex}
+  .hop{background:var(--giay);border:3px double var(--vang);border-radius:12px;padding:16px 18px;width:min(520px,100%);margin:auto}
+  .hop h2{margin:0 0 4px}
+  .hop .nho{font-size:13px;color:var(--phu);margin:0 0 10px;text-align:center}
+  .hop label{display:block;font-size:13px;color:var(--phu);margin:6px 0}
+  .hop input,.hop select,.hop textarea{width:100%;padding:7px 9px;border:1px solid var(--vang-nhat);border-radius:8px;font:inherit;font-size:15px;color:var(--chu);background:#fff;margin-top:2px}
+  .hop .hang{display:flex;gap:10px}.hop .hang>*{flex:1}
+  .hop .o-tich{display:flex;align-items:center;gap:6px;padding-top:18px}.hop .o-tich input{width:auto}
+  .hop .nut{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin-top:12px}
+  #kqGop{flex:1;font-size:13px}
+  .bay{position:absolute;left:-9999px}
+  .dang-tai{text-align:center;color:var(--phu);padding:30px}
+  footer{text-align:center;font-size:12px;color:var(--phu);margin-top:10px}
+  @media (max-width:640px){header{padding:4px 30px 0}h1{font-size:30px}.goc{width:46px;height:46px}}
+  @media print{.thanh,#chiTiet{display:none!important}.khung{overflow:visible}body{background:#fff}.trang{box-shadow:none;margin:0}}
+</style>
+</head>
+<body>
+<!-- ===== DỮ LIỆU GIA PHẢ — trợ lý tự cập nhật mỗi khi thầy nhắn trong chat =====
+  Mỗi người: id (mã P01…), ten (chỉ nhớ tên cũng được), gioi "nam"/"nu", sinh, mat, ngay_gio "dd/mm" âm lịch,
+  da_mat:true (khi không rõ ngày mất), cha, me (mã), vo_chong [mã], thu (con thứ), quan_he, que, mo, ghi_chu -->
+<script>
+// Địa chỉ ứng dụng web Apps Script (…/exec). Để trống = chỉ xem dữ liệu ghi ngay dưới đây.
+window.API_URL = "https://script.google.com/macros/s/AKfycbwh0i97EKx4yvWN7xp76xe_kLiwRsol1ZSM9FFWdqyI5NcgxbjDdYAHipVdy3WxwONU/exec";
+window.GIA_PHA = {
+  ho: "Võ",
+  tien_so: "Tiên sơ họ Lê và họ Mai",
+  que: "Bình Mỹ · An Giang",
+  nguoi_lap: "Võ Thanh Hòa",
+  cap_nhat: "30/10/2026",
+  nguoi: [
+  ]
+};
+</script>
+<!-- ===== HẾT DỮ LIỆU ===== -->
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- góc hoa văn mây cuộn -->
+    <symbol id="goc" viewBox="0 0 74 74">
+      <g fill="none" stroke="#8e1b1b" stroke-width="2.2" stroke-linecap="round">
+        <path d="M6 68V6h62"/>
+        <path d="M14 60V14h46" stroke="#b8862b" stroke-width="1.4"/>
+        <path d="M22 14c0 8 8 8 8 0s-8-8-8 0zM14 22c8 0 8 8 0 8" stroke="#b8862b" stroke-width="1.6"/>
+        <path d="M30 22c6-6 14-4 14 3s-8 7-8 1 6-5 9-2"/>
+        <path d="M22 30c-6 6-4 14 3 14s7-8 1-8-5 6-2 9"/>
+      </g>
+      <circle cx="22" cy="22" r="3" fill="#8e1b1b"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="trang">
+  <svg class="goc tt"><use href="#goc"/></svg><svg class="goc tp"><use href="#goc"/></svg>
+  <svg class="goc dt"><use href="#goc"/></svg><svg class="goc dp"><use href="#goc"/></svg>
+
+  <header>
+    <div class="dong-chu-han">Uống nước nhớ nguồn</div>
+    <h1 id="tieuDe">Gia phả</h1>
+    <div class="tien-so" id="tienSo"></div>
+    <div class="que" id="que"></div>
+    <svg class="hoa-van" viewBox="0 0 520 30" aria-hidden="true">
+      <g fill="none" stroke="#b8862b" stroke-width="1.6" stroke-linecap="round">
+        <path d="M10 15h170M340 15h170"/>
+        <path d="M180 15c10-12 24-12 24 0s-14 10-14 2 8-6 10-2M340 15c-10-12-24-12-24 0s14 10 14 2-8-6-10-2"/>
+      </g>
+      <!-- hoa sen giữa -->
+      <g transform="translate(260 16)">
+        <path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" fill="#8e1b1b"/>
+        <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" fill="#b8862b"/>
+        <path d="M-22 11h44" stroke="#8e1b1b" stroke-width="2"/>
+      </g>
+    </svg>
+    <div class="nguoi-lap">Người lập: <b id="nguoiLap"></b></div>
+    <div class="ban-nhap" id="phuDe"></div>
+  </header>
+
+  <div class="thanh">
+    <button onclick="thuPhong(0.1)">＋ Phóng to</button>
+    <button onclick="thuPhong(-0.1)">－ Thu nhỏ</button>
+    <button onclick="thuPhong(0)">Vừa khung</button>
+    <button onclick="window.print()">🖨 In</button>
+    <button class="truc-tuyen chinh" onclick="moGop()">✍ Góp thông tin</button>
+    <button class="truc-tuyen" onclick="location.href=API_URL+'?trang=quantri'" title="Chỉ người lập gia phả">🔑 Duyệt</button>
+  </div>
+  <div class="khung"><div class="cay" id="cay"></div></div>
+  <section class="bang" id="bangGio"></section>
+  <footer>✝ người đã khuất · viền xanh: nam · viền hồng: nữ · bấm vào tên để xem chi tiết</footer>
+</div>
+<div id="chiTiet"></div>
+
+<div id="manGop" class="man" onclick="if(event.target===this)dongGop()">
+  <form class="hop" onsubmit="guiGop(event)">
+    <h2>✍ Góp thông tin gia phả</h2>
+    <p class="nho">Thông tin gửi về sẽ được <b>người lập gia phả duyệt</b> rồi mới hiện trên cây. Xin không ghi số điện thoại, địa chỉ nhà.</p>
+    <div class="hang">
+      <select name="loai" required onchange="doiLoai()">
+        <option value="them_con">Thêm con của</option>
+        <option value="them_vc">Thêm vợ/chồng của</option>
+        <option value="sua">Sửa, bổ sung thông tin của</option>
+      </select>
+      <select name="moc" required></select>
+    </div>
+    <label>Họ tên (chỉ nhớ tên cũng được)<input name="ten" maxlength="80"></label>
+    <div class="hang">
+      <label>Nam/nữ<select name="gioi"><option value="">—</option><option value="nam">Nam</option><option value="nu">Nữ</option></select></label>
+      <label>Con thứ<input name="thu" maxlength="3" inputmode="numeric"></label>
+    </div>
+    <div class="hang">
+      <label>Năm/ngày sinh<input name="sinh" maxlength="20" placeholder="VD 1950"></label>
+      <label>Năm/ngày mất<input name="mat" maxlength="20"></label>
+    </div>
+    <div class="hang">
+      <label>Ngày giỗ (âm lịch)<input name="ngay_gio" maxlength="10" placeholder="dd/mm, VD 12/03"></label>
+      <label class="o-tich"><input type="checkbox" name="da_mat" value="x"> Đã mất (không rõ ngày)</label>
+    </div>
+    <label>Quê / nơi ở<input name="que" maxlength="80" placeholder="Xã, tỉnh"></label>
+    <label>Mộ phần<input name="mo" maxlength="80"></label>
+    <label>Ghi chú<textarea name="ghi_chu" maxlength="500" rows="2"></textarea></label>
+    <label>Người gửi <b>*</b><input name="nguoi_gui" required maxlength="60" placeholder="VD Võ Văn Tâm, cháu chi 2"></label>
+    <input name="bay" class="bay" tabindex="-1" autocomplete="off">
+    <div class="nut"><span id="kqGop"></span><button type="button" onclick="dongGop()">Đóng</button><button class="chinh" id="nutGui">Gửi</button></div>
+  </form>
+</div>
+
+<script>
+const API_URL = window.API_URL || "";
+let ds = [], theoMa = {};
+const coMa = m => m && theoMa[m];
+const daMat = p => !!(p.da_mat || p.mat || p.ngay_gio);
+const nam = s => String(s || "").match(/\d{4}/)?.[0] || "";
+// Thông tin do người trong họ gửi: luôn thoát ký tự trước khi đưa vào trang
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function batDau(DL) {
+  ds = DL.nguoi || []; theoMa = {};
+  ds.forEach(p => { theoMa[p.id] = p; p.vo_chong = p.vo_chong || []; });
+  // Vợ chồng ghi một phía cũng tự nối hai phía
+  ds.forEach(p => p.vo_chong.forEach(m => {
+    const q = theoMa[m]; if (q && !q.vo_chong.includes(p.id)) q.vo_chong.push(p.id);
+  }));
+  document.getElementById("tieuDe").textContent = DL.ho ? `Gia phả họ ${DL.ho}` : "Gia phả";
+  document.getElementById("tienSo").textContent = DL.tien_so ? `(${DL.tien_so})` : "";
+  document.getElementById("que").textContent = DL.que || "";
+  document.getElementById("nguoiLap").textContent = DL.nguoi_lap || "";
+  document.getElementById("phuDe").textContent =
+    `${ds.length} người · cập nhật ${DL.cap_nhat || ""} · ✅ BẢN NHÁP — thầy duyệt trước khi dùng`;
+  daVe.clear(); veCay(); veBangGio(); dienMoc();
+}
+
+function con(p) {
+  const bome = [p.id, ...p.vo_chong];
+  return ds.filter(c => bome.includes(c.cha) || bome.includes(c.me))
+    .sort((a, b) => (a.thu || 99) - (b.thu || 99) || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
+}
+
+function the(p, doi) {
+  const ns = nam(p.sinh), nm = nam(p.mat);
+  const khoang = ns || nm ? `${ns || "?"} – ${daMat(p) ? (nm || "?") : ""}` : "";
+  return `<div class="nguoi ${p.gioi === "nu" ? "nu" : "nam"} ${daMat(p) ? "da-mat" : ""}" onclick="xem('${esc(p.id)}')">
+    <div class="ten">${daMat(p) ? "✝ " : ""}${esc(p.ten || p.id)}</div>
+    ${khoang ? `<div class="nam-sinh">${khoang}</div>` : ""}
+    ${p.ngay_gio ? `<div class="gio">🕯 Giỗ ${esc(p.ngay_gio)} ÂL</div>` : ""}
+    ${doi ? `<div class="the-doi">Đời ${doi}</div>` : ""}
+  </div>`;
+}
+
+const daVe = new Set();
+function ve(p, doi, chi) {
+  daVe.add(p.id);
+  const vc = p.vo_chong.map(coMa).filter(Boolean);
+  vc.forEach(q => daVe.add(q.id));
+  const cac = con(p).filter(c => !daVe.has(c.id));
+  const nhom = `<div class="doi">${chi ? `<span class="chi">Chi ${chi}</span>` : ""}
+    <div class="cap">${the(p, doi)}${vc.map(q => the(q)).join("")}</div></div>`;
+  // Đời 2 (các con của cụ tổ) tự đánh số thành các chi
+  return `<li>${nhom}${cac.length ? `<ul>${cac.map((c, i) => ve(c, doi + 1, doi === 1 && cac.length > 1 ? i + 1 : 0)).join("")}</ul>` : ""}</li>`;
+}
+
+function veCay() {
+  const el = document.getElementById("cay");
+  if (!ds.length && API_URL) {
+    el.innerHTML = `<div class="rong" style="text-align:center"><b>Gia phả đang được người lập nhập dần.</b><br>
+      Xin bà con quay lại sau. Khi cây đã có người, bà con bấm <b>✍ Góp thông tin</b> để bổ sung.</div>`;
+    return;
+  }
+  if (!ds.length) {
+    el.innerHTML = `<div class="rong"><b>Chưa có ai trong gia phả.</b><br>
+      Thầy nhắn trong chat cho trợ lý từng người, VD:<br>
+      <i>“Cụ tổ tên Hai (không rõ họ), giỗ 10/2 âm lịch. Cụ bà tên Tư. Con: Võ Văn A (con cả), Võ Thị B.”</i><br>
+      Trợ lý tự nối cha mẹ – vợ chồng – con cái, chia chi và vẽ lại cây.</div>`;
+    return;
+  }
+  // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ
+  const laGoc = p => !coMa(p.cha) && !coMa(p.me) &&
+    !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me)));
+  const goc = ds.filter(laGoc).sort((a, b) =>
+    (a.gioi === "nu") - (b.gioi === "nu") || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
+  let html = "";
+  goc.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0); });
+  ds.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0); });
+  el.innerHTML = `<ul>${html}</ul>`;
+}
+
+function veBangGio() {
+  const gio = ds.filter(p => p.ngay_gio).map(p => {
+    const [d, m] = String(p.ngay_gio).split("/").map(Number);
+    return {p, d: d || 0, m: m || 0};
+  }).sort((a, b) => a.m - b.m || a.d - b.d);
+  const loi = [];
+  ds.forEach(p => {
+    if (daMat(p) && !p.ngay_gio) loi.push(`${esc(p.ten)} đã mất nhưng chưa có ngày giỗ`);
+    ["cha", "me"].forEach(k => { if (p[k] && !theoMa[p[k]]) loi.push(`${esc(p.ten)}: mã ${k} “${esc(p[k])}” chưa có trong dữ liệu`); });
+  });
+  document.getElementById("bangGio").innerHTML = `
+    ${gio.length ? `<h2>📅 Lịch ngày giỗ (âm lịch)</h2>
+    <table><tr><th>Ngày giỗ</th><th>Người đã khuất</th><th>Năm mất</th><th>Quan hệ</th></tr>
+    ${gio.map(({p}) => `<tr><td><b>${esc(p.ngay_gio)}</b></td><td>${esc(p.ten)}</td><td>${nam(p.mat) || "?"}</td><td>${esc(p.quan_he)}</td></tr>`).join("")}
+    </table>` : ""}
+    ${loi.length ? `<p class="canh-bao">⚠ Cần bổ sung: ${loi.join(" · ")}</p>` : ""}`;
+}
+
+function xem(id) {
+  const p = theoMa[id], k = document.getElementById("chiTiet");
+  const ten = m => theoMa[m]?.ten || "";
+  const dong = (nhan, gt) => gt ? `<div>${nhan}: ${esc(gt)}</div>` : "";
+  k.innerHTML = `<b>${esc(p.ten)}</b>${p.quan_he ? ` <i>(${esc(p.quan_he)})</i>` : ""}
+    ${dong("Sinh", p.sinh)}${dong("Mất", p.mat)}${dong("Giỗ", p.ngay_gio && p.ngay_gio + " âm lịch")}
+    ${dong("Cha", ten(p.cha))}${dong("Mẹ", ten(p.me))}
+    ${dong("Vợ/chồng", p.vo_chong.map(ten).join(", "))}
+    ${dong("Con", con(p).map(c => c.ten).join(", "))}
+    ${dong("Quê / nơi ở", p.que)}${dong("Mộ phần", p.mo)}${dong("Ghi chú", p.ghi_chu)}
+    <div style="text-align:right;margin-top:6px">
+      ${API_URL ? `<button onclick="moGop('sua','${esc(p.id)}')">✍ Bổ sung</button> <button onclick="moGop('them_con','${esc(p.id)}')">＋ Thêm con</button> ` : ""}
+      <button onclick="this.parentNode.parentNode.style.display='none'">Đóng</button></div>`;
+  k.style.display = "block";
+}
+
+let tiLe = 1;
+function thuPhong(d) {
+  const cay = document.getElementById("cay");
+  if (d === 0) { tiLe = Math.min(1, (document.querySelector(".khung").clientWidth - 32) / cay.scrollWidth); }
+  else tiLe = Math.max(0.3, Math.min(2, tiLe + d));
+  cay.style.transform = `scale(${tiLe})`;
+}
+
+// ---------- GÓP THÔNG TIN (chỉ khi có API_URL) ----------
+const form = () => document.querySelector("#manGop form");
+function dienMoc() {
+  const s = form().moc, cu = s.value;
+  s.innerHTML = ds.slice().sort((a, b) => String(a.ten).localeCompare(String(b.ten), "vi"))
+    .map(p => `<option value="${esc(p.id)}">${esc(p.ten)}${nam(p.sinh) ? " (" + nam(p.sinh) + ")" : ""}</option>`).join("");
+  if (cu) s.value = cu;
+}
+function doiLoai() {
+  const f = form();
+  f.ten.required = f.loai.value !== "sua";
+  f.ten.placeholder = f.loai.value === "sua" ? "Chỉ ghi nếu muốn sửa tên" : "";
+}
+function moGop(loai, moc) {
+  if (!ds.length) { alert("Cây chưa có ai để làm mốc. Xin liên hệ người lập gia phả."); return; }
+  const f = form(); f.reset(); document.getElementById("kqGop").textContent = "";
+  if (loai) f.loai.value = loai;
+  if (moc) f.moc.value = moc;
+  doiLoai();
+  document.getElementById("chiTiet").style.display = "none";
+  document.getElementById("manGop").classList.add("mo");
+}
+function dongGop() { document.getElementById("manGop").classList.remove("mo"); }
+async function guiGop(e) {
+  e.preventDefault();
+  const f = form(), kq = document.getElementById("kqGop"), nut = document.getElementById("nutGui");
+  const nguoi = {};
+  ["ten", "gioi", "sinh", "mat", "ngay_gio", "thu", "que", "mo", "ghi_chu"].forEach(k => { if (f[k].value.trim()) nguoi[k] = f[k].value.trim(); });
+  if (f.da_mat.checked) nguoi.da_mat = "x";
+  nut.disabled = true; kq.textContent = "Đang gửi…"; kq.style.color = "";
+  try {
+    // text/plain để Google nhận thẳng, không cần hỏi trước
+    const r = await fetch(API_URL, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify({loai: f.loai.value, moc: f.moc.value, nguoi, nguoi_gui: f.nguoi_gui.value, bay: f.bay.value})});
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.loi);
+    kq.style.color = "#2e7d32"; kq.textContent = "✅ Đã gửi. Cảm ơn! Thông tin sẽ hiện sau khi được duyệt.";
+    const gui = f.nguoi_gui.value; f.reset(); f.nguoi_gui.value = gui; doiLoai();
+  } catch (err) {
+    kq.style.color = "#8e1b1b"; kq.textContent = "⚠ " + (err.message || "Không gửi được, xin thử lại.");
+  } finally { nut.disabled = false; }
+}
+
+// ---------- KHỞI ĐỘNG ----------
+batDau(window.GIA_PHA || {nguoi: []});
+if (API_URL) {
+  document.body.classList.add("co-mang");
+  document.getElementById("cay").innerHTML = `<div class="dang-tai">Đang tải gia phả…</div>`;
+  fetch(API_URL + "?api=ds").then(r => r.json()).then(batDau)
+    .catch(() => { batDau(window.GIA_PHA || {nguoi: []});
+      document.getElementById("phuDe").textContent += " · ⚠ chưa tải được bản mới nhất, đang hiện bản lưu sẵn"; });
+}
+</script>
+</body>
+</html>
