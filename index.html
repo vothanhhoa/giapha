@@ -503,8 +503,9 @@ function lapSach(DL) {
     <div><b>Gia phả họ ${esc(DL.ho || "")}</b>${DL.tien_so ? " · " + esc(DL.tien_so) : ""}</div>
     <div>${esc(DL.que || "")}</div>
     <div class="nho-bia">${ds.length} người · ${soDong} dòng</div>
+    ${DL.dien_thoai ? `<div class="nho-bia">Liên hệ thiết kế, in ấn: ${esc(DL.nguoi_lap || "")} · ☎ ${esc(DL.dien_thoai)}</div>` : ""}
     <div class="nho-bia">Người lập: ${esc(DL.nguoi_lap || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in">—</span></div>
-    <div class="nho-bia" style="margin-top:14px">Xem và góp thông tin bản mới nhất:<br><b>vothanhhoa.github.io/giapha</b></div>
+    ${/^https?:/.test(location.href) ? `<div class="nho-bia" style="margin-top:14px">Xem và góp thông tin bản mới nhất:<br><b>${esc(location.host + location.pathname.replace(/index\.html$/, ""))}</b></div>` : ""}
     <div class="nho-bia" style="margin-top:10px;font-style:italic">Con cháu giữ gìn, bổ sung cho các đời sau.</div></div></div>`);
   const el = document.getElementById("sach");
   el.innerHTML = html.join("");
@@ -684,7 +685,7 @@ function veLienHe(DL) {
     <div class="dv">${esc(DL.nguoi_lap)}</div>
     <div>${esc(DL.dich_vu || "")}</div>
     <div>Thiết kế · In ấn · Trao sản phẩm · Giá cả hợp lý</div>
-    ${so ? `<a href="tel:${so_goi}">☎ ${esc(so)}</a><a href="https://zalo.me/${so_goi}" target="_blank" rel="noopener">💬 Zalo ${esc(so)}</a>` : ""}
+    ${so ? `<a href="tel:${so_goi}">☎ Gọi ${esc(so)}</a>` : ""}
     <div class="nho">Nhận lập gia phả trực tuyến và in sách gia phả cho các dòng họ.</div>` : "";
 }
 
