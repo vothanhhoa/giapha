@@ -461,7 +461,8 @@ function layGoc() {
   // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ
   const laGoc = p => !coMa(p.cha) && !coMa(p.me) &&
     !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me)));
-  return ds.filter(laGoc).sort((a, b) =>
+  // Ô «thu» của người đứng đầu dòng = thứ tự dòng (nội 1, ngoại 2, bên vợ 3…)
+  return ds.filter(laGoc).sort((a, b) => (a.thu || 99) - (b.thu || 99) ||
     (a.gioi === "nu") - (b.gioi === "nu") || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
 }
 
@@ -553,7 +554,8 @@ function ve(p, doi, chi, tieuDe) {
   const soChi = i => doi === 1 && tatCa.length > 1 ? i + 1 : 0;
   return `<li>${nhom}${tatCa.length ? `<ul>${tatCa.map((c, i) => daCo.has(c.id) ? theTro(c, soChi(i)) : ve(c, doi + 1, soChi(i))).join("")}</ul>` : ""}</li>`;
 }
-const tenDong = (g, nhieu) => nhieu ? `Dòng ${g.gioi === "nu" ? "bà" : "ông"} ${g.ten}` : "";
+// VD «Dòng ông Mai Văn Luông · Ông cố ngoại của thầy Võ Thanh Hòa»
+const tenDong = (g, nhieu) => nhieu ? `Dòng ${g.gioi === "nu" ? "bà" : "ông"} ${g.ten}${g.quan_he ? " · " + g.quan_he.replace(/\s*\(.*\)$/, "") : ""}` : "";
 
 function veCay() {
   const el = document.getElementById("cay");
