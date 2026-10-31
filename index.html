@@ -43,6 +43,28 @@
   .dong-ng .ph{color:var(--phu);font-size:13px} .dong-ng .gi{color:var(--do);font-size:13px;font-weight:600}
   .dong-ng .vc{display:block;font-size:13px;color:var(--phu)}
   .an{display:none!important}
+  /* Kiểu sách cổ truyền: khung hồi văn bốn góc, nền mây mờ, dải «ĐỜI THỨ …» như cuộn thư, «Trang n» */
+  .cuon,.trang-co{display:none}
+  body.kieu-co .to:not(.bia){background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg transform=''%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M3 77V3h74' stroke='%238e1b1b' stroke-width='3'/%3E%3Cpath d='M11 77V11h66' stroke='%23b8862b' stroke-width='1.4'/%3E%3Cpath d='M19 52V19h33v20H32v-8h10' stroke='%238e1b1b' stroke-width='2.6'/%3E%3Cpath d='M19 66h8M66 19v8' stroke='%23b8862b' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") top 6px left 6px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg transform='translate(80 0) scale(-1 1)'%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M3 77V3h74' stroke='%238e1b1b' stroke-width='3'/%3E%3Cpath d='M11 77V11h66' stroke='%23b8862b' stroke-width='1.4'/%3E%3Cpath d='M19 52V19h33v20H32v-8h10' stroke='%238e1b1b' stroke-width='2.6'/%3E%3Cpath d='M19 66h8M66 19v8' stroke='%23b8862b' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") top 6px right 6px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg transform='translate(0 80) scale(1 -1)'%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M3 77V3h74' stroke='%238e1b1b' stroke-width='3'/%3E%3Cpath d='M11 77V11h66' stroke='%23b8862b' stroke-width='1.4'/%3E%3Cpath d='M19 52V19h33v20H32v-8h10' stroke='%238e1b1b' stroke-width='2.6'/%3E%3Cpath d='M19 66h8M66 19v8' stroke='%23b8862b' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") bottom 6px left 6px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg transform='translate(80 80) scale(-1 -1)'%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M3 77V3h74' stroke='%238e1b1b' stroke-width='3'/%3E%3Cpath d='M11 77V11h66' stroke='%23b8862b' stroke-width='1.4'/%3E%3Cpath d='M19 52V19h33v20H32v-8h10' stroke='%238e1b1b' stroke-width='2.6'/%3E%3Cpath d='M19 66h8M66 19v8' stroke='%23b8862b' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") bottom 6px right 6px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260' viewBox='0 0 420 260'%3E%3Cg fill='none' stroke='%23b8862b' stroke-width='3' stroke-linecap='round' opacity='.32'%3E%3Cpath d='M30 200c-6-30 30-46 52-28 6-34 62-38 74-6 20-20 64-8 60 24'/%3E%3Cpath d='M96 176a14 14 0 1 1 14-14 8 8 0 1 1-8-8'/%3E%3Cpath d='M170 170a12 12 0 1 1 12-12 7 7 0 1 1-7-7'/%3E%3Cpath d='M220 110c-4-26 28-40 46-22 8-30 56-30 64-2 18-16 54-4 50 20'/%3E%3Cpath d='M278 92a12 12 0 1 1 12-12 7 7 0 1 1-7-7'/%3E%3Cpath d='M346 96a10 10 0 1 1 10-10 6 6 0 1 1-6-6'/%3E%3Cpath d='M60 238c40-6 90-6 130 0M240 150c40-6 90-6 130 0'/%3E%3Cpath d='M150 60c-3-18 20-28 32-15 5-20 40-20 44 0 12-10 36-2 33 14'/%3E%3C/g%3E%3C/svg%3E") center 78%/86% no-repeat,#fffdf4;border:2px solid #8e1b1b;outline:1px solid #b8862b;outline-offset:-8px;
+    padding:42px 70px 30px 74px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.kieu-co .cuon{display:flex;justify-content:center;margin:4px 0 10px}
+  body.kieu-co .cuon span{position:relative;display:inline-block;padding:6px 44px;border:2px solid #b8862b;
+    background:linear-gradient(#fffbea,#f3e2b4);font-family:"Times New Roman",serif;font-weight:700;letter-spacing:2px;color:#5e0f0f;font-size:21px;
+    box-shadow:inset 0 0 0 3px #fffbea,inset 0 0 0 4px #b8862b;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.kieu-co .cuon span::before,body.kieu-co .cuon span::after{content:"";position:absolute;top:-7px;bottom:-7px;width:14px;border-radius:4px;
+    background:linear-gradient(90deg,#2f4a2a,#6b8a4e,#2f4a2a);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.kieu-co .cuon span::before{left:-15px} body.kieu-co .cuon span::after{right:-15px}
+  body.kieu-co .to .dau-trang{border-bottom-color:#b8862b;font-style:italic}
+  body.kieu-co .to h3{color:#8e1b1b}
+  body.kieu-co .so-trang .so-hien{display:none} body.kieu-co .trang-co{display:inline;font-style:italic;font-family:"Times New Roman",serif;color:#8e1b1b}
+  body.kieu-co .to .so-trang{text-align:right}
+  @media print{
+    /* Mỗi tờ kín một trang A4 để khung hồi văn bao trọn trang; số trang nằm sát đáy */
+    body.kieu-co .to:not(.bia):not(.trang-trang){min-height:268mm;display:flex;flex-direction:column}
+    body.kieu-co .to:not(.bia) .so-trang{margin-top:auto;padding-top:10px;padding-right:18px}
+  }
   /* Bộ màu: 0 đỏ son · 1 xanh ngọc · 2 nâu gỗ trầm · 3 tím than — đều đi với nhũ vàng.
      Đặt trên body (đổi theo ngày, nút 🎨) và trên từng dòng họ (mỗi dòng một màu) */
   [data-mau="0"]{--do:#8e1b1b;--do-dam:#5e0f0f;--vang:#b8862b;--vang-nhat:#e9cf8f;--nen:#f7efdc;--giay:#fffaf0}
@@ -279,6 +301,7 @@ window.GIA_PHA = {
       <button onclick="latTrang(-1)">◀ Trước</button>
       <select id="denTrang" onchange="moTrang(+this.value)" aria-label="Mở đến trang"></select>
       <button onclick="latTrang(1)">Sau ▶</button>
+      <button id="nutKieu" onclick="doiKieu()" title="Đổi kiểu trang sách">🏯 Cổ truyền</button>
     </div>
     <div class="nho-sach">Vuốt sang trái/phải hoặc bấm ◀ ▶ để lật. Nút 🖨 In sẽ in cả cuốn, mỗi gia đình một trang A4.</div>
   </div>
@@ -294,6 +317,7 @@ window.GIA_PHA = {
     <label class="chon-in"><input type="radio" name="phamvi" value="tat" checked> <b>Cả cuốn</b>: bìa trước, mục lục, mọi dòng, lịch giỗ, bìa sau</label>
     <label class="chon-in"><input type="radio" name="phamvi" value="chi"> <b>Một chi</b> (kèm bìa trước, bìa sau):<br><select id="chonChi"></select></label>
     <label class="chon-in"><input type="radio" name="phamvi" value="trang"> <b>Trang đang xem</b>: <span id="tenTrangIn"></span></label>
+    <label class="chon-in"><input type="checkbox" id="kieuCoIn" onchange="doiKieu(this.checked)"> <b>Kiểu cổ truyền</b>: khung hồi văn, nền mây, dải «Đời thứ…»</label>
     <label class="chon-in"><input type="checkbox" id="haiMat"> <b>In 2 mặt giấy</b>: tự thêm trang trắng để bìa và đầu mỗi dòng họ nằm ở mặt phải khi đóng quyển</label>
     <p class="nho" style="text-align:left">Khổ A4 đứng, lề trong 2,2 cm để đóng gáy. Mỗi trang ghi ngày cập nhật và ngày in.
       Ở hộp in của máy: chọn máy in hoặc <b>«Lưu dưới dạng PDF»</b>, bỏ chọn <b>«Đầu trang và chân trang»</b>, bật <b>«Đồ họa nền»</b> để in màu khung.</p>
@@ -438,7 +462,7 @@ function lapSach(DL) {
   giaDinh.forEach((g, i) => { g.trang = i + 3; if (!g.moChi) { trangCua[g.p.id] = g.trang; g.vc.forEach(q => { trangCua[q.id] = trangCua[q.id] || g.trang; }); } });
   const trangGio = giaDinh.length + 3;
   // Chân trang: số trang; khi in thêm tên gia phả, ngày cập nhật, ngày in
-  const chan = so => `<div class="so-trang"><span class="chi-in">Gia phả họ ${esc(DL.ho || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in"></span> · </span>— ${so} —</div>`;
+  const chan = so => `<div class="so-trang"><span class="chi-in">Gia phả họ ${esc(DL.ho || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in"></span> · </span><span class="so-hien">— ${so} —</span><span class="trang-co">Trang ${so}</span></div>`;
   const sen = `<svg class="sen" viewBox="-30 -18 60 34" aria-hidden="true"><path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" style="fill:var(--do)"/>
     <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" style="fill:var(--vang)"/><path d="M-22 11h44" style="stroke:var(--do)" stroke-width="2"/></svg>`;
   const gocBia = ["tt", "tp", "dt", "dp"].map(k => `<svg class="bia-goc ${k}"><use href="#goc"/></svg>`).join("");
@@ -468,6 +492,7 @@ function lapSach(DL) {
     if (g.moChi) {
       const trong = giaDinh.filter(x => !x.moChi && x.dong === g.dong && x.chi === g.chi);
       html.push(`<div class="to mo-chi" data-chi="${esc(g.dong)}|${g.chi}"><div class="dau-trang"><span>${esc(g.dong)}</span><span></span></div>
+        <div class="cuon"><span>CHI THỨ ${g.chi}</span></div>
         <h3>Chi ${g.chi}</h3><div style="font-size:18px">${esc(g.nguoi.ten)}</div>
         <div style="margin:14px auto 0;font-size:13px;color:var(--phu)">${trong.length ? trong.length + " gia đình · từ trang " + trong[0].trang
           : trangCua[g.nguoi.id] ? "Gia đình ghi ở dòng bên " + (g.nguoi.gioi === "nu" ? "chồng" : "vợ") + ", trang " + trangCua[g.nguoi.id]
@@ -479,7 +504,7 @@ function lapSach(DL) {
     const {p, vc} = g;
     const cac = con(p);
     const tieuDe = `Gia đình ${p.gioi === "nu" ? "bà" : "ông"} ${esc(p.ten)}${vc.length ? " – " + vc.map(q => (q.gioi === "nu" ? "bà " : "ông ") + esc(q.ten)).join(", ") : ""}`;
-    html.push(`<div class="to${g.doi === 1 ? " dau-dong" : ""}" data-chi="${esc(g.dong)}|${g.chi || 0}">${dauTrang(g)}<h3>${tieuDe}</h3>
+    html.push(`<div class="to${g.doi === 1 ? " dau-dong" : ""}" data-chi="${esc(g.dong)}|${g.chi || 0}">${dauTrang(g)}<div class="cuon"><span>ĐỜI THỨ ${g.doi}</span></div><h3>${tieuDe}</h3>
       <div class="hai">${oNguoi(p, trangCua)}${vc.map(q => oNguoi(q, trangCua)).join("")}</div>
       ${cac.length ? `<h4>Các con (${cac.length})</h4><table><tr><th>#</th><th>Họ tên</th><th>Năm sinh</th><th>Ghi chú</th></tr>
         ${cac.map((c, i) => `<tr><td>${i + 1}</td><td>${daMat(c) ? "✝ " : ""}${esc(c.ten)}</td><td>${nam(c.sinh) || ""}</td>
@@ -529,6 +554,20 @@ function lapSach(DL) {
   document.getElementById("chonChi").innerHTML = giaDinh.filter(g => g.moChi)
     .map(g => `<option value="${esc(g.dong)}|${g.chi}">${esc(g.dong.replace(/ · .*/, ""))} · Chi ${g.chi} · ${esc(g.nguoi.ten)}</option>`).join("");
 }
+
+// ---------- KIỂU TRANG SÁCH ----------
+function doiKieu(co) {
+  if (co === undefined) co = !document.body.classList.contains("kieu-co");
+  document.body.classList.toggle("kieu-co", co);
+  try { localStorage.setItem("giapha_kieu", co ? "co" : ""); } catch (e) { /* bỏ qua */ }
+  const n = document.getElementById("nutKieu"); if (n) n.textContent = co ? "✨ Hiện đại" : "🏯 Cổ truyền";
+  const o = document.getElementById("kieuCoIn"); if (o) o.checked = co;
+}
+(() => {
+  let co = /[?&]kieu=co\b/.test(location.search);
+  if (!co) { try { co = localStorage.getItem("giapha_kieu") === "co"; } catch (e) { /* bỏ qua */ } }
+  doiKieu(co);
+})();
 
 // ---------- IN ----------
 const homNay = () => { const d = new Date(); return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`; };
