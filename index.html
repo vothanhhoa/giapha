@@ -28,7 +28,52 @@
   button{border:1px solid var(--vang);background:#fff;color:var(--do-dam);padding:6px 14px;border-radius:999px;cursor:pointer;font-size:14px}
   button:hover{background:var(--vang-nhat)}
   .khung{overflow:auto;padding:16px 8px 30px}
-  .cay{transform-origin:top center;display:inline-block;min-width:100%;text-align:center}
+  .cay{display:inline-block;min-width:100%;text-align:center}
+  /* Dạng danh sách (mặc định trên điện thoại) */
+  .danh-sach{max-width:760px;margin:0 auto;padding:8px 4px 24px}
+  .danh-sach details{background:#fff;border:1px solid var(--vang-nhat);border-left:5px solid var(--do);border-radius:10px;margin:8px 0;padding:6px 10px}
+  .danh-sach summary{cursor:pointer;font-weight:700;color:var(--do-dam);list-style:none}
+  .danh-sach summary::-webkit-details-marker{display:none}
+  .danh-sach summary::before{content:"▸ ";color:var(--vang)} .danh-sach details[open]>summary::before{content:"▾ "}
+  .danh-sach ul{list-style:none;margin:0;padding-left:16px;border-left:2px solid var(--vang-nhat)}
+  .danh-sach li{padding:4px 0 4px 8px;position:relative}
+  .danh-sach li::before{content:"";position:absolute;left:-16px;top:16px;width:14px;border-top:2px solid var(--vang-nhat)}
+  .dong-ng{cursor:pointer;line-height:1.45}
+  .dong-ng .tn{font-weight:700} .dong-ng .tn.nam{color:var(--nam)} .dong-ng .tn.nu{color:var(--nu)} .dong-ng .tn.mat{color:var(--mat)}
+  .dong-ng .ph{color:var(--phu);font-size:13px} .dong-ng .gi{color:var(--do);font-size:13px;font-weight:600}
+  .dong-ng .vc{display:block;font-size:13px;color:var(--phu)}
+  .an{display:none!important}
+  /* Sách lật: mỗi tờ là một gia đình, lật quanh gáy bên trái */
+  .sach-khung{display:flex;flex-direction:column;align-items:center;padding:6px 0 18px}
+  .sach{position:relative;width:min(560px,94vw);aspect-ratio:1/1.414;perspective:2400px}
+  .to{position:absolute;inset:0;background:#fffdf6 linear-gradient(to right,rgba(94,15,15,.09),transparent 22px);border:1px solid var(--vang);
+      border-radius:3px 10px 10px 3px;box-shadow:none;transform-origin:left center;
+      transition:transform .8s cubic-bezier(.4,.1,.3,1);backface-visibility:hidden;overflow:auto;padding:22px 22px 18px 28px;font-size:14px;line-height:1.5}
+  .to.lat{transform:rotateY(-180deg)}
+  .to.dang{box-shadow:0 8px 22px rgba(94,15,15,.2),4px 4px 0 -1px #f3e6c8,8px 8px 0 -2px #e9d8b0}
+  .to .dau-trang{display:flex;justify-content:space-between;font-size:12px;color:var(--phu);border-bottom:1px solid var(--vang-nhat);padding-bottom:4px;margin-bottom:8px}
+  .to h3{font-family:"Times New Roman",serif;color:var(--do);font-size:21px;margin:4px 0 10px;text-align:center}
+  .to h4{font-family:"Times New Roman",serif;color:var(--do-dam);font-size:16px;margin:12px 0 4px}
+  .to .hai{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .to .o-ng{border:1px solid var(--vang-nhat);border-top:3px solid var(--nam);border-radius:8px;padding:6px 8px;background:#fff}
+  .to .o-ng.nu{border-top-color:var(--nu)} .to .o-ng b{font-size:15px}
+  .to .o-ng div{font-size:13px}
+  .to table th{background:var(--do-dam)} .to table td,.to table th{font-size:13px;padding:4px 6px}
+  .to .so-trang{text-align:center;font-size:12px;color:var(--phu);margin-top:12px}
+  .to.bia{display:flex;flex-direction:column;justify-content:center;text-align:center;background:var(--do);color:#f6e7c1;border:6px double var(--vang)}
+  .to.bia h2{color:#fff3d0;font-size:38px;margin:10px 0}
+  .to.bia .vien{border:1px solid var(--vang);padding:30px 14px;margin:8px}
+  .to.mo-chi{display:flex;flex-direction:column;justify-content:center;text-align:center}
+  .to.mo-chi h3{font-size:28px}
+  .to .muc{display:flex;gap:6px;font-size:13px;cursor:pointer}.to .muc .cham{flex:1;border-bottom:1px dotted var(--vang)}
+  .to .muc.cap1{font-weight:700;color:var(--do);margin-top:6px}.to .muc.cap2{padding-left:12px;font-weight:600}.to .muc.cap3{padding-left:26px}
+  .dieu-khien{display:flex;gap:8px;align-items:center;margin-top:12px}
+  .dieu-khien select{padding:6px;border:1px solid var(--vang);border-radius:8px;max-width:52vw;font:inherit}
+  .nho-sach{font-size:12px;color:var(--phu);margin-top:6px;text-align:center;padding:0 12px}
+  .dong-ho{font-family:"Times New Roman",serif;font-size:17px;font-weight:700;color:var(--do);margin-bottom:4px}
+  .tieu-dong{margin:22px 0 4px;border-top:1px dashed var(--vang);padding-top:14px}
+  .nguoi.tro{background:#fdf6e6;border-style:dashed}
+  .cay > ul > li + li{margin-left:40px}
   /* Cây dạng ul/li có nét nối */
   .cay ul{padding-top:24px;position:relative;display:flex;justify-content:center;margin:0;padding-left:0}
   .cay li{list-style:none;position:relative;padding:24px 6px 0;text-align:center}
@@ -45,8 +90,8 @@
   .cay > ul > li::before,.cay > ul > li::after{display:none}
   .doi{display:inline-flex;flex-direction:column;align-items:center;gap:2px}
   .chi{font-size:11px;font-weight:700;color:#fff;background:var(--do);border-radius:999px;padding:1px 10px;letter-spacing:.5px}
-  .cap{display:inline-flex;gap:4px;background:linear-gradient(#fbf1d8,#f3e2b6);border:1px solid var(--vang);border-radius:12px;padding:4px}
-  .nguoi{background:#fff;border:2px solid var(--vang-nhat);border-top-width:4px;border-radius:9px;padding:6px 10px;min-width:118px;max-width:170px;
+  .cap{display:inline-flex;flex-direction:column;gap:3px;background:linear-gradient(#fbf1d8,#f3e2b6);border:1px solid var(--vang);border-radius:12px;padding:4px}
+  .nguoi{background:#fff;border:2px solid var(--vang-nhat);border-top-width:4px;border-radius:9px;padding:5px 8px;min-width:104px;max-width:150px;
          cursor:pointer;font-size:13px;line-height:1.35;transition:transform .15s,box-shadow .15s}
   .nguoi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(94,15,15,.2)}
   .nguoi.nam{border-top-color:var(--nam)} .nguoi.nu{border-top-color:var(--nu)}
@@ -81,10 +126,32 @@
   .hop .nut{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin-top:12px}
   #kqGop{flex:1;font-size:13px}
   .bay{position:absolute;left:-9999px}
+  .ke{background:#fff4dc;border:1px dashed var(--vang);border-radius:10px;padding:10px;margin-bottom:8px}
+  .nut-ke{width:100%;background:var(--do);color:#fff;border:0;font-size:16px;padding:10px;margin-bottom:6px}
+  .nut-ke.dang-nghe,.mic.dang-nghe{background:#c62828;color:#fff;animation:nhip 1s infinite}
+  @keyframes nhip{50%{opacity:.6}}
+  .o-mic{display:flex;gap:4px;align-items:center}.o-mic>input,.o-mic>textarea{flex:1}
+  .mic{padding:6px 9px;font-size:15px;line-height:1;flex:none}
+  .hop .ke .nho{margin:4px 0 0;text-align:left}
   .dang-tai{text-align:center;color:var(--phu);padding:30px}
   footer{text-align:center;font-size:12px;color:var(--phu);margin-top:10px}
   @media (max-width:640px){header{padding:4px 30px 0}h1{font-size:30px}.goc{width:46px;height:46px}}
-  @media print{.thanh,#chiTiet{display:none!important}.khung{overflow:visible}body{background:#fff}.trang{box-shadow:none;margin:0}}
+  /* In: luôn in cả cuốn sách, mỗi tờ (bìa, mục lục, mở chi, từng gia đình, lịch giỗ) một trang A4 */
+  @page{size:A4;margin:14mm 14mm 12mm 18mm}
+  @media print{
+    html,body,.trang,#sachKhung,.sach{background:#fff!important}
+    .thanh,#chiTiet,#manGop,.trang>header,#khungCay,#danhSach,#bangGio,footer,.goc,.dieu-khien,.nho-sach{display:none!important}
+    .trang{border:0;outline:0;box-shadow:none;margin:0;padding:0;max-width:none}
+    #sachKhung{display:block!important;padding:0}
+    .sach{width:auto;aspect-ratio:auto;perspective:none}
+    .to{position:static;transform:none!important;box-shadow:none;border:0;border-radius:0;overflow:visible;background:#fff;
+        padding:0;break-after:page;page-break-after:always;font-size:12.5pt}
+    .to:last-child{break-after:auto;page-break-after:auto}
+    .to.bia{min-height:250mm;background:#fff;color:var(--do-dam);border:4px double var(--do)}
+    .to.bia h2{color:var(--do)}
+    .to.mo-chi{min-height:250mm}
+    th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
 </style>
 </head>
 <body>
@@ -148,14 +215,27 @@ window.GIA_PHA = {
   </header>
 
   <div class="thanh">
-    <button onclick="thuPhong(0.1)">＋ Phóng to</button>
-    <button onclick="thuPhong(-0.1)">－ Thu nhỏ</button>
-    <button onclick="thuPhong(0)">Vừa khung</button>
+    <button id="nutDs" onclick="doiCheDo('ds')">📋 Danh sách</button>
+    <button id="nutCay" onclick="doiCheDo('cay')">🌳 Sơ đồ cây</button>
+    <button id="nutSach" onclick="doiCheDo('sach')">📖 Sách lật</button>
+    <button class="nut-cay" onclick="thuPhong(0.1)">＋</button>
+    <button class="nut-cay" onclick="thuPhong(-0.1)">－</button>
+    <button class="nut-cay" onclick="thuPhong(0)">Vừa khung</button>
     <button onclick="window.print()">🖨 In</button>
     <button class="truc-tuyen chinh" onclick="moGop()">✍ Góp thông tin</button>
     <button class="truc-tuyen" onclick="location.href=API_URL+'?trang=quantri'" title="Chỉ người lập gia phả">🔑 Duyệt</button>
   </div>
-  <div class="khung"><div class="cay" id="cay"></div></div>
+  <div class="khung" id="khungCay"><div class="cay" id="cay"></div></div>
+  <div class="danh-sach" id="danhSach"></div>
+  <div class="sach-khung an" id="sachKhung">
+    <div class="sach" id="sach"></div>
+    <div class="dieu-khien">
+      <button onclick="latTrang(-1)">◀ Trước</button>
+      <select id="denTrang" onchange="moTrang(+this.value)" aria-label="Mở đến trang"></select>
+      <button onclick="latTrang(1)">Sau ▶</button>
+    </div>
+    <div class="nho-sach">Vuốt sang trái/phải hoặc bấm ◀ ▶ để lật. Nút 🖨 In sẽ in cả cuốn, mỗi gia đình một trang A4.</div>
+  </div>
   <section class="bang" id="bangGio"></section>
   <footer>✝ người đã khuất · viền xanh: nam · viền hồng: nữ · bấm vào tên để xem chi tiết</footer>
 </div>
@@ -165,6 +245,11 @@ window.GIA_PHA = {
   <form class="hop" onsubmit="guiGop(event)">
     <h2>✍ Góp thông tin gia phả</h2>
     <p class="nho">Thông tin gửi về sẽ được <b>người lập gia phả duyệt</b> rồi mới hiện trên cây. Xin không ghi số điện thoại, địa chỉ nhà.</p>
+    <div class="ke">
+      <button type="button" class="nut-ke" id="nutKe" onclick="noi(this, form().ke)">🎤 Bấm để kể bằng giọng nói</button>
+      <textarea name="ke" maxlength="400" rows="3" placeholder="VD: Ông Võ Văn Ba là con thứ hai của cụ Hai, sinh năm 1950, có ba người con là…"></textarea>
+      <div class="nho" id="goiYGiong">Nói chậm, rõ từng ý. Kể xong, xem lại chữ rồi điền các ô bên dưới nếu biết. Người lập gia phả sẽ đọc lời kể và sửa cho đúng.</div>
+    </div>
     <div class="hang">
       <select name="loai" required onchange="doiLoai()">
         <option value="them_con">Thêm con của</option>
@@ -217,12 +302,217 @@ function batDau(DL) {
   document.getElementById("nguoiLap").textContent = DL.nguoi_lap || "";
   document.getElementById("phuDe").textContent =
     `${ds.length} người · cập nhật ${DL.cap_nhat || ""} · ✅ BẢN NHÁP — thầy duyệt trước khi dùng`;
-  daVe.clear(); veCay(); veBangGio(); dienMoc();
+  daVe.clear(); veCay(); veDanhSach(); veBangGio(); dienMoc(); lapSach(DL); doiCheDo(cheDo);
+}
+
+// Điện thoại mặc định xem danh sách (cây nhiều chi rất rộng), máy tính xem sơ đồ
+let cheDo = innerWidth < 760 ? "ds" : "cay";
+function doiCheDo(m) {
+  cheDo = m;
+  document.getElementById("khungCay").classList.toggle("an", m !== "cay");
+  document.getElementById("danhSach").classList.toggle("an", m !== "ds");
+  document.querySelectorAll(".nut-cay").forEach(b => b.classList.toggle("an", m !== "cay"));
+  document.getElementById("sachKhung").classList.toggle("an", m !== "sach");
+  document.getElementById("nutDs").classList.toggle("chinh", m === "ds");
+  document.getElementById("nutCay").classList.toggle("chinh", m === "cay");
+  document.getElementById("nutSach").classList.toggle("chinh", m === "sach");
+}
+
+// ---------- SÁCH LẬT ----------
+// Thứ tự: bìa → mục lục → từng dòng (gia đình đời 1) → từng chi (trang mở chi, rồi các gia đình theo đời) → lịch giỗ.
+// Người có vợ/chồng hoặc có con thì có trang gia đình riêng; người chưa lập gia đình ghi trong trang của cha mẹ.
+let toSach = [], trangHienTai = 0;
+const coGiaDinh = p => p.vo_chong.some(coMa) || con(p).length > 0;
+const gt = (lbl, v) => v ? `<div>${lbl}: ${esc(v)}</div>` : "";
+function oNguoi(p, trangCua) {
+  const cm = [coMa(p.cha), coMa(p.me)].filter(Boolean);
+  const tCm = cm.length && trangCua[cm[0].id] ? ` (tr. ${trangCua[cm[0].id]})` : "";
+  return `<div class="o-ng ${p.gioi === "nu" ? "nu" : ""}"><b>${daMat(p) ? "✝ " : ""}${esc(p.ten)}</b>
+    ${p.quan_he ? `<div style="color:var(--do);font-style:italic">${esc(p.quan_he)}</div>` : ""}
+    ${gt("Sinh", p.sinh)}${gt("Mất", p.mat || (daMat(p) && !p.mat ? "đã mất" : ""))}${gt("Giỗ (âm lịch)", p.ngay_gio)}
+    ${cm.length ? `<div>Con của: ${cm.map(x => esc(x.ten)).join(" – ")}${tCm}</div>` : ""}
+    ${gt("Quê / nơi ở", p.que)}${gt("Mộ phần", p.mo)}${gt("Ghi chú", p.ghi_chu)}</div>`;
+}
+function lapSach(DL) {
+  const giaDinh = [], da = new Set(), coCho = new Set();   // coCho: đã được ghi tên trong trang cha mẹ
+  const ghi = (p, doi, chi, dong) => {
+    da.add(p.id);
+    const vc = p.vo_chong.map(coMa).filter(Boolean);
+    vc.forEach(q => da.add(q.id));
+    con(p).forEach(c => coCho.add(c.id));
+    giaDinh.push({p, vc, doi, chi, dong});
+  };
+  [...layGoc(), ...ds].forEach(g => {
+    if (da.has(g.id) || coCho.has(g.id)) return;
+    const dong = tenDong(g, true);
+    ghi(g, 1, null, dong);
+    con(g).forEach((c, i) => {
+      giaDinh.push({moChi: true, chi: i + 1, dong, nguoi: c});
+      if (da.has(c.id)) return;   // đã có trang ở dòng khác (VD con gái đã ghi bên nhà chồng)
+      // Trong một chi: đi lần lượt từng đời
+      let hang = [{p: c, doi: 2}];
+      while (hang.length) {
+        const sau = [];
+        hang.forEach(({p, doi}) => {
+          if (da.has(p.id)) return;
+          if (!coGiaDinh(p)) return;
+          ghi(p, doi, i + 1, dong);
+          con(p).forEach(cc => { if (!da.has(cc.id)) sau.push({p: cc, doi: doi + 1}); });
+        });
+        hang = sau;
+      }
+    });
+  });
+  // Đánh số trang: 1 bìa, 2 mục lục, rồi lần lượt
+  const trangCua = {};   // mã người → trang gia đình có người đó
+  giaDinh.forEach((g, i) => { g.trang = i + 3; if (!g.moChi) { trangCua[g.p.id] = g.trang; g.vc.forEach(q => { trangCua[q.id] = trangCua[q.id] || g.trang; }); } });
+  const trangGio = giaDinh.length + 3;
+  const dauTrang = g => `<div class="dau-trang"><span>${esc(g.dong)}</span><span>${g.chi ? "Chi " + g.chi + " · " : ""}Đời ${g.doi}</span></div>`;
+  const html = [];
+  html.push(`<div class="to bia"><div class="vien">
+    <div style="font-style:italic">Uống nước nhớ nguồn</div>
+    <h2>Gia phả họ ${esc(DL.ho || "")}</h2>
+    <div style="font-style:italic;font-size:17px">${DL.tien_so ? "(" + esc(DL.tien_so) + ")" : ""}</div>
+    <div style="margin-top:6px">${esc(DL.que || "")}</div>
+    <div style="margin:26px 0 4px;font-size:22px">❀ ❀ ❀</div>
+    <div>Người lập: <b>${esc(DL.nguoi_lap || "")}</b></div>
+    <div style="font-size:13px;margin-top:6px">${ds.length} người · cập nhật ${esc(DL.cap_nhat || "")}</div>
+    <div style="font-size:12px;margin-top:18px;opacity:.85">✅ BẢN NHÁP — thầy duyệt trước khi dùng</div></div></div>`);
+  let ml = "";
+  giaDinh.forEach(g => {
+    if (g.moChi) ml += `<div class="muc cap2" onclick="moTrang(${g.trang})"><span>Chi ${g.chi} · ${esc(g.nguoi.ten)}</span><span class="cham"></span><span>${g.trang}</span></div>`;
+    else if (g.doi === 1) ml += `<div class="muc cap1" onclick="moTrang(${g.trang})"><span>${esc(g.dong)}</span><span class="cham"></span><span>${g.trang}</span></div>`;
+    else ml += `<div class="muc cap3" onclick="moTrang(${g.trang})"><span>Đời ${g.doi} · Gia đình ${esc(g.p.ten)}</span><span class="cham"></span><span>${g.trang}</span></div>`;
+  });
+  ml += `<div class="muc cap1" onclick="moTrang(${trangGio})"><span>Lịch ngày giỗ</span><span class="cham"></span><span>${trangGio}</span></div>`;
+  html.push(`<div class="to"><h3>Mục lục</h3>${ml}<div class="so-trang">— 2 —</div></div>`);
+  giaDinh.forEach(g => {
+    if (g.moChi) {
+      const trong = giaDinh.filter(x => !x.moChi && x.dong === g.dong && x.chi === g.chi);
+      html.push(`<div class="to mo-chi"><div class="dau-trang"><span>${esc(g.dong)}</span><span></span></div>
+        <h3>Chi ${g.chi}</h3><div style="font-size:18px">${esc(g.nguoi.ten)}</div>
+        <div style="margin:14px auto 0;font-size:13px;color:var(--phu)">${trong.length ? trong.length + " gia đình · từ trang " + trong[0].trang
+          : trangCua[g.nguoi.id] ? "Gia đình ghi ở dòng bên " + (g.nguoi.gioi === "nu" ? "chồng" : "vợ") + ", trang " + trangCua[g.nguoi.id]
+          : "Chưa ghi gia đình riêng"}</div>
+        ${!trong.length && !trangCua[g.nguoi.id] ? `<div style="max-width:300px;margin:12px auto 0;text-align:left">${oNguoi(g.nguoi, trangCua)}</div>` : ""}
+        <div class="so-trang">— ${g.trang} —</div></div>`);
+      return;
+    }
+    const {p, vc} = g;
+    const cac = con(p);
+    const tieuDe = `Gia đình ${p.gioi === "nu" ? "bà" : "ông"} ${esc(p.ten)}${vc.length ? " – " + vc.map(q => (q.gioi === "nu" ? "bà " : "ông ") + esc(q.ten)).join(", ") : ""}`;
+    html.push(`<div class="to">${dauTrang(g)}<h3>${tieuDe}</h3>
+      <div class="hai">${oNguoi(p, trangCua)}${vc.map(q => oNguoi(q, trangCua)).join("")}</div>
+      ${cac.length ? `<h4>Các con (${cac.length})</h4><table><tr><th>#</th><th>Họ tên</th><th>Năm sinh</th><th>Ghi chú</th></tr>
+        ${cac.map((c, i) => `<tr><td>${i + 1}</td><td>${daMat(c) ? "✝ " : ""}${esc(c.ten)}</td><td>${nam(c.sinh) || ""}</td>
+          <td>${[c.mat || (daMat(c) ? "đã mất" : ""), c.ngay_gio ? "giỗ " + esc(c.ngay_gio) + " ÂL" : "",
+                 trangCua[c.id] && trangCua[c.id] !== g.trang ? "gia đình riêng: tr. " + trangCua[c.id] : ""].filter(Boolean).join(" · ")}</td></tr>`).join("")}
+        </table>` : `<div style="margin-top:10px;color:var(--phu)">Chưa ghi con.</div>`}
+      <div class="so-trang">— ${g.trang} —</div></div>`);
+  });
+  const gio = ds.filter(p => p.ngay_gio).sort((a, b) => {
+    const [da_, ma] = String(a.ngay_gio).split("/").map(Number), [db, mb] = String(b.ngay_gio).split("/").map(Number);
+    return (ma - mb) || (da_ - db);
+  });
+  html.push(`<div class="to"><h3>Lịch ngày giỗ (âm lịch)</h3>
+    <table><tr><th>Ngày giỗ</th><th>Người đã khuất</th><th>Năm mất</th><th>Trang</th></tr>
+    ${gio.map(p => `<tr><td><b>${esc(p.ngay_gio)}</b></td><td>${esc(p.ten)}</td><td>${nam(p.mat) || "?"}</td><td>${trangCua[p.id] || ""}</td></tr>`).join("")}</table>
+    <div class="so-trang">— ${trangGio} —</div></div>`);
+  const el = document.getElementById("sach");
+  el.innerHTML = html.join("");
+  toSach = [...el.querySelectorAll(".to")];
+  document.getElementById("denTrang").innerHTML = toSach.map((t, i) => {
+    const g = giaDinh[i - 2];
+    const ten = i === 0 ? "Bìa" : i === 1 ? "Mục lục" : i === toSach.length - 1 ? "Lịch ngày giỗ" :
+      g.moChi ? `Chi ${g.chi} · ${g.nguoi.ten}` : g.doi === 1 ? g.dong : `Đời ${g.doi} · ${g.p.ten}`;
+    return `<option value="${i + 1}">Trang ${i + 1} · ${esc(ten)}</option>`;
+  }).join("");
+  moTrang(Math.min(trangHienTai + 1, toSach.length) || 1);
+}
+function moTrang(so) {
+  trangHienTai = Math.max(0, Math.min(toSach.length - 1, so - 1));
+  const n = toSach.length;
+  toSach.forEach((t, i) => {
+    t.classList.toggle("lat", i < trangHienTai);
+    t.classList.toggle("dang", i === trangHienTai);
+    t.style.zIndex = i < trangHienTai ? i + 1 : n * 2 - i;
+  });
+  const chon = document.getElementById("denTrang");
+  if (chon) chon.value = trangHienTai + 1;
+}
+function latTrang(b) { moTrang(trangHienTai + 1 + b); }
+(function vuotLat() {
+  let x0 = null;
+  const el = document.getElementById("sach");
+  el.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, {passive: true});
+  el.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) latTrang(dx < 0 ? 1 : -1);
+  });
+  document.addEventListener("keydown", e => {
+    if (cheDo !== "sach" || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === "ArrowRight") latTrang(1);
+    if (e.key === "ArrowLeft") latTrang(-1);
+  });
+})();
+
+function layGoc() {
+  // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ
+  const laGoc = p => !coMa(p.cha) && !coMa(p.me) &&
+    !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me)));
+  return ds.filter(laGoc).sort((a, b) =>
+    (a.gioi === "nu") - (b.gioi === "nu") || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
+}
+
+function dong(p) {
+  const ns = nam(p.sinh), nm = nam(p.mat);
+  const khoang = ns || nm ? ` <span class="ph">(${ns || "?"}${daMat(p) ? " – " + (nm || "?") : ""})</span>` : "";
+  return `<span class="tn ${daMat(p) ? "mat" : p.gioi === "nu" ? "nu" : "nam"}">${daMat(p) ? "✝ " : ""}${esc(p.ten || p.id)}</span>${khoang}` +
+    (p.ngay_gio ? ` <span class="gi">🕯 giỗ ${esc(p.ngay_gio)} ÂL</span>` : "");
+}
+
+function veDanhSach() {
+  const el = document.getElementById("danhSach");
+  if (!ds.length) { el.innerHTML = ""; return; }
+  const da = new Set();
+  const tro = c => `<div class="dong-ng" onclick="xem('${esc(c.id)}')">↪ ${dong(c)} <span class="ph">· ${esc(ghiTro(c))}</span></div>`;
+  const mot = (p, doi) => {
+    da.add(p.id);
+    const vc = p.vo_chong.map(coMa).filter(Boolean);
+    const cu = new Set(vc.filter(q => da.has(q.id)).map(q => q.id));
+    vc.forEach(q => da.add(q.id));
+    const tatCa = con(p), daCo = new Set(tatCa.filter(c => da.has(c.id)).map(c => c.id));
+    const nd = `<div class="dong-ng" onclick="xem('${esc(p.id)}')">${dong(p)}
+      ${vc.map(q => `<span class="vc">${q.gioi === "nu" ? "Vợ" : "Chồng"}: ${cu.has(q.id) ? "↪ " : ""}${dong(q)}${cu.has(q.id) ? ' <span class="ph">· đã ghi ở dòng trên</span>' : ""}</span>`).join("")}</div>`;
+    const duoi = tatCa.length ? `<ul>${tatCa.map(c => `<li>${daCo.has(c.id) ? tro(c) : mot(c, doi + 1)}</li>`).join("")}</ul>` : "";
+    return nd + duoi;
+  };
+  let html = "";
+  const goc = layGoc(), nhieu = goc.length > 2;
+  [...goc, ...ds].forEach(g => {
+    if (da.has(g.id)) return;
+    da.add(g.id);
+    const vc = g.vo_chong.map(coMa).filter(Boolean);
+    const cu = new Set(vc.filter(q => da.has(q.id)).map(q => q.id));
+    vc.forEach(q => da.add(q.id));
+    if (nhieu) html += `<h2 class="tieu-dong">${esc(tenDong(g, true))}</h2>`;
+    html += `<div class="dong-ng" style="text-align:center;margin:6px 0 10px" onclick="xem('${esc(g.id)}')">Đời 1: ${dong(g)}
+      ${vc.map(q => `<span class="vc">${q.gioi === "nu" ? "Vợ" : "Chồng"}: ${cu.has(q.id) ? "↪ " : ""}${dong(q)}${cu.has(q.id) ? ' <span class="ph">· đã ghi ở dòng trên</span>' : ""}</span>`).join("")}</div>`;
+    const tatCa = con(g), daCo = new Set(tatCa.filter(c => da.has(c.id)).map(c => c.id));
+    // Mỗi người con của đời 1 là một chi, gập/mở được
+    html += tatCa.map((c, i) => `<details${tatCa.length <= 3 ? " open" : ""}><summary>Chi ${i + 1} · ${esc(c.ten)}</summary>
+      <ul><li>${daCo.has(c.id) ? tro(c) : mot(c, 2)}</li></ul></details>`).join("");
+  });
+  el.innerHTML = html;
 }
 
 function con(p) {
-  const bome = [p.id, ...p.vo_chong];
-  return ds.filter(c => bome.includes(c.cha) || bome.includes(c.me))
+  // Con của p, hoặc con của vợ/chồng p mà không ghi người kia.
+  // Con của vợ/chồng với người khác (VD cụ bà tái giá) không tính vào đây.
+  const vc = p.vo_chong;
+  return ds.filter(c => c.cha === p.id || c.me === p.id ||
+      (vc.includes(c.cha) && !coMa(c.me)) || (vc.includes(c.me) && !coMa(c.cha)))
     .sort((a, b) => (a.thu || 99) - (b.thu || 99) || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
 }
 
@@ -238,16 +528,32 @@ function the(p, doi) {
 }
 
 const daVe = new Set();
-function ve(p, doi, chi) {
+// Người đã vẽ ở dòng khác (VD con gái đã có bên nhà chồng): hiện thẻ trỏ sang, bấm xem chi tiết
+const theTro = (c, chi) => `<li><div class="doi">${chi ? `<span class="chi">Chi ${chi}</span>` : ""}
+  <div class="nguoi ${c.gioi === "nu" ? "nu" : "nam"} tro" onclick="xem('${esc(c.id)}')"><div class="ten">↪ ${esc(c.ten)}</div>
+  <div class="the-doi">${esc(ghiTro(c))}</div></div></div></li>`;
+// VD «vợ ông Võ Thanh Hòa — xem ở dòng ông Võ Sĩ Huệ»
+function ghiTro(c) {
+  const vc = c.vo_chong.map(coMa).filter(Boolean)[0];
+  return vc ? `${c.gioi === "nu" ? "vợ ông" : "chồng bà"} ${vc.ten}, xem ở dòng bên ${c.gioi === "nu" ? "chồng" : "vợ"}` : "xem ở dòng khác";
+}
+
+function ve(p, doi, chi, tieuDe) {
   daVe.add(p.id);
   const vc = p.vo_chong.map(coMa).filter(Boolean);
+  // Vợ/chồng đã vẽ ở chỗ khác (VD cụ bà có hai đời chồng) thì hiện thẻ trỏ
+  const vcCu = new Set(vc.filter(q => daVe.has(q.id)).map(q => q.id));
   vc.forEach(q => daVe.add(q.id));
-  const cac = con(p).filter(c => !daVe.has(c.id));
-  const nhom = `<div class="doi">${chi ? `<span class="chi">Chi ${chi}</span>` : ""}
-    <div class="cap">${the(p, doi)}${vc.map(q => the(q)).join("")}</div></div>`;
-  // Đời 2 (các con của cụ tổ) tự đánh số thành các chi
-  return `<li>${nhom}${cac.length ? `<ul>${cac.map((c, i) => ve(c, doi + 1, doi === 1 && cac.length > 1 ? i + 1 : 0)).join("")}</ul>` : ""}</li>`;
+  const tatCa = con(p), daCo = new Set(tatCa.filter(c => daVe.has(c.id)).map(c => c.id));
+  const theVc = q => vcCu.has(q.id) ? `<div class="nguoi ${q.gioi === "nu" ? "nu" : "nam"} tro" onclick="xem('${esc(q.id)}')">
+    <div class="ten">↪ ${esc(q.ten)}</div><div class="the-doi">đã ghi ở dòng trên</div></div>` : the(q);
+  const nhom = `<div class="doi">${tieuDe ? `<span class="dong-ho">${esc(tieuDe)}</span>` : ""}${chi ? `<span class="chi">Chi ${chi}</span>` : ""}
+    <div class="cap">${the(p, doi)}${vc.map(theVc).join("")}</div></div>`;
+  // Đời 2 (các con của đời 1) tự đánh số thành các chi
+  const soChi = i => doi === 1 && tatCa.length > 1 ? i + 1 : 0;
+  return `<li>${nhom}${tatCa.length ? `<ul>${tatCa.map((c, i) => daCo.has(c.id) ? theTro(c, soChi(i)) : ve(c, doi + 1, soChi(i))).join("")}</ul>` : ""}</li>`;
 }
+const tenDong = (g, nhieu) => nhieu ? `Dòng ${g.gioi === "nu" ? "bà" : "ông"} ${g.ten}` : "";
 
 function veCay() {
   const el = document.getElementById("cay");
@@ -263,13 +569,9 @@ function veCay() {
       Trợ lý tự nối cha mẹ – vợ chồng – con cái, chia chi và vẽ lại cây.</div>`;
     return;
   }
-  // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ
-  const laGoc = p => !coMa(p.cha) && !coMa(p.me) &&
-    !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me)));
-  const goc = ds.filter(laGoc).sort((a, b) =>
-    (a.gioi === "nu") - (b.gioi === "nu") || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
   let html = "";
-  goc.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0); });
+  const goc = layGoc(), nhieu = goc.length > 2;   // một cặp vợ chồng gốc = 2 người
+  goc.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0, tenDong(p, nhieu)); });
   ds.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0); });
   el.innerHTML = `<ul>${html}</ul>`;
 }
@@ -311,9 +613,12 @@ function xem(id) {
 let tiLe = 1;
 function thuPhong(d) {
   const cay = document.getElementById("cay");
-  if (d === 0) { tiLe = Math.min(1, (document.querySelector(".khung").clientWidth - 32) / cay.scrollWidth); }
-  else tiLe = Math.max(0.3, Math.min(2, tiLe + d));
-  cay.style.transform = `scale(${tiLe})`;
+  // zoom (không dùng transform) để thanh cuộn khớp với cỡ cây sau khi thu phóng
+  if (d === 0) {
+    cay.style.zoom = 1;
+    tiLe = Math.max(0.2, Math.min(1, (document.getElementById("khungCay").clientWidth - 24) / cay.scrollWidth));
+  } else tiLe = Math.max(0.2, Math.min(2, tiLe + d));
+  cay.style.zoom = tiLe;
 }
 
 // ---------- GÓP THÔNG TIN (chỉ khi có API_URL) ----------
@@ -338,13 +643,17 @@ function moGop(loai, moc) {
   document.getElementById("chiTiet").style.display = "none";
   document.getElementById("manGop").classList.add("mo");
 }
-function dongGop() { document.getElementById("manGop").classList.remove("mo"); }
+function dongGop() { dungNghe(); document.getElementById("manGop").classList.remove("mo"); }
 async function guiGop(e) {
   e.preventDefault();
   const f = form(), kq = document.getElementById("kqGop"), nut = document.getElementById("nutGui");
   const nguoi = {};
   ["ten", "gioi", "sinh", "mat", "ngay_gio", "thu", "que", "mo", "ghi_chu"].forEach(k => { if (f[k].value.trim()) nguoi[k] = f[k].value.trim(); });
   if (f.da_mat.checked) nguoi.da_mat = "x";
+  // Lời kể bằng giọng nói đi kèm vào ghi chú để người lập gia phả đọc khi duyệt
+  const ke = f.ke.value.trim();
+  if (ke) nguoi.ghi_chu = ["Lời kể: " + ke, nguoi.ghi_chu].filter(Boolean).join(" · ").slice(0, 500);
+  dungNghe();
   nut.disabled = true; kq.textContent = "Đang gửi…"; kq.style.color = "";
   try {
     // text/plain để Google nhận thẳng, không cần hỏi trước
@@ -358,6 +667,51 @@ async function guiGop(e) {
     kq.style.color = "#8e1b1b"; kq.textContent = "⚠ " + (err.message || "Không gửi được, xin thử lại.");
   } finally { nut.disabled = false; }
 }
+
+// ---------- NÓI THAY GÕ (nhận giọng tiếng Việt của trình duyệt) ----------
+// Chrome trên Android, Safari trên iPhone có sẵn; trình duyệt trong Zalo thường không có
+// → khi đó ẩn nút, nhắc dùng micro trên bàn phím điện thoại.
+const NhanGiong = window.SpeechRecognition || window.webkitSpeechRecognition;
+let dangNghe = null;
+function dungNghe() { if (dangNghe) { dangNghe.rec.stop(); } }
+function noi(nut, o) {
+  if (dangNghe) { const cu = dangNghe.nut; dungNghe(); if (cu === nut) return; }
+  const rec = new NhanGiong();
+  rec.lang = "vi-VN"; rec.interimResults = true; rec.continuous = o.tagName === "TEXTAREA";
+  const goc = o.value ? o.value.trim() + " " : "";
+  const nhanCu = nut.textContent;
+  rec.onresult = e => {
+    let chu = "";
+    for (let i = 0; i < e.results.length; i++) chu += e.results[i][0].transcript;
+    o.value = (goc + chu).slice(0, o.maxLength > 0 ? o.maxLength : 500);
+  };
+  rec.onerror = e => {
+    if (e.error === "not-allowed" || e.error === "service-not-allowed")
+      alert("Điện thoại chưa cho dùng micro. Xin bấm Cho phép khi trình duyệt hỏi, hoặc bấm nút 🎤 trên bàn phím để nói.");
+  };
+  rec.onend = () => { nut.classList.remove("dang-nghe"); nut.textContent = nhanCu; dangNghe = null; };
+  dangNghe = {rec, nut};
+  nut.classList.add("dang-nghe");
+  nut.textContent = nut.classList.contains("nut-ke") ? "⏹ Đang nghe… bấm để dừng" : "⏹";
+  try { rec.start(); } catch (err) { rec.onend(); }
+}
+(function ganMicro() {
+  const f = form();
+  if (!NhanGiong) {
+    document.getElementById("nutKe").classList.add("an");
+    document.getElementById("goiYGiong").innerHTML =
+      "Muốn nói thay gõ: bấm vào ô rồi bấm nút <b>🎤 micro trên bàn phím</b> điện thoại. Mở trang bằng Chrome (Android) hoặc Safari (iPhone) sẽ có thêm nút nói ngay trên trang.";
+    return;
+  }
+  ["ten", "sinh", "mat", "ngay_gio", "que", "mo", "ghi_chu", "nguoi_gui"].forEach(k => {
+    const o = f[k], boc = document.createElement("span");
+    boc.className = "o-mic"; o.parentNode.insertBefore(boc, o); boc.appendChild(o);
+    const nut = document.createElement("button");
+    nut.type = "button"; nut.className = "mic"; nut.textContent = "🎤"; nut.title = "Bấm rồi nói";
+    nut.onclick = () => noi(nut, o);
+    boc.appendChild(nut);
+  });
+})();
 
 // ---------- KHỞI ĐỘNG ----------
 batDau(window.GIA_PHA || {nguoi: []});
