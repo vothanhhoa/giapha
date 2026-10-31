@@ -43,6 +43,14 @@
   .dong-ng .ph{color:var(--phu);font-size:13px} .dong-ng .gi{color:var(--do);font-size:13px;font-weight:600}
   .dong-ng .vc{display:block;font-size:13px;color:var(--phu)}
   .an{display:none!important}
+  /* Bộ màu: 0 đỏ son · 1 xanh ngọc · 2 nâu gỗ trầm · 3 tím than — đều đi với nhũ vàng.
+     Đặt trên body (đổi theo ngày, nút 🎨) và trên từng dòng họ (mỗi dòng một màu) */
+  [data-mau="0"]{--do:#8e1b1b;--do-dam:#5e0f0f;--vang:#b8862b;--vang-nhat:#e9cf8f;--nen:#f7efdc;--giay:#fffaf0}
+  [data-mau="1"]{--do:#0f5c55;--do-dam:#08403b;--vang:#b08a2e;--vang-nhat:#e2d29e;--nen:#ecf2ea;--giay:#fbfdf8}
+  [data-mau="2"]{--do:#6b3a1e;--do-dam:#4a2612;--vang:#a8783a;--vang-nhat:#e6cfa3;--nen:#f4ece0;--giay:#fffaf2}
+  [data-mau="3"]{--do:#3b2a5c;--do-dam:#261a3e;--vang:#b0902f;--vang-nhat:#e4d6a2;--nen:#f0edf5;--giay:#fdfcff}
+  body{transition:background-color .6s}
+  .trang,.cap,.nguoi,.to,.chi,.danh-sach details,button{transition:background-color .6s,border-color .6s,color .6s}
   /* Sách lật: mỗi tờ là một gia đình, lật quanh gáy bên trái */
   .sach-khung{display:flex;flex-direction:column;align-items:center;padding:6px 0 18px}
   .sach{position:relative;width:min(560px,94vw);aspect-ratio:1/1.414;perspective:2400px}
@@ -156,6 +164,10 @@
   .to .anh-so{width:70px;height:88px;object-fit:cover;border-radius:6px;border:1px solid var(--vang);float:right;margin:0 0 4px 6px}
   .dang-tai{text-align:center;color:var(--phu);padding:30px}
   footer{text-align:center;font-size:12px;color:var(--phu);margin-top:10px}
+  .lien-he{margin:16px auto 0;max-width:760px;text-align:center;border-top:2px solid var(--vang);padding:12px 10px 4px;font-size:14px;line-height:1.6}
+  .lien-he .dv{font-family:"Times New Roman",serif;font-size:18px;font-weight:700;color:var(--do)}
+  .lien-he a{color:var(--do-dam);font-weight:700;text-decoration:none;border:1px solid var(--vang);border-radius:999px;padding:3px 12px;display:inline-block;margin:4px}
+  .lien-he .nho{font-size:12px;color:var(--phu)}
   @media (max-width:640px){header{padding:4px 30px 0}h1{font-size:30px}.goc{width:46px;height:46px}}
   /* In: luôn in cả cuốn sách, mỗi tờ (bìa, mục lục, mở chi, từng gia đình, lịch giỗ) một trang A4 */
   @page{size:A4;margin:14mm 14mm 12mm 18mm}
@@ -194,7 +206,9 @@ window.GIA_PHA = {
   ho: "Võ",
   tien_so: "Tiên sơ họ Lê và họ Mai",
   que: "Bình Mỹ · An Giang",
-  nguoi_lap: "Võ Thanh Hòa",
+  nguoi_lap: "Hộ Kinh Doanh NHP",
+  dien_thoai: "0816 591 700",
+  dich_vu: "Thiết kế gia phả trực tuyến · In sách gia phả đóng quyển · Trao tận tay sản phẩm",
   cap_nhat: "30/10/2026",
   nguoi: [
   ]
@@ -206,14 +220,14 @@ window.GIA_PHA = {
   <defs>
     <!-- góc hoa văn mây cuộn -->
     <symbol id="goc" viewBox="0 0 74 74">
-      <g fill="none" stroke="#8e1b1b" stroke-width="2.2" stroke-linecap="round">
+      <g fill="none" style="stroke:var(--do)" stroke-width="2.2" stroke-linecap="round">
         <path d="M6 68V6h62"/>
-        <path d="M14 60V14h46" stroke="#b8862b" stroke-width="1.4"/>
-        <path d="M22 14c0 8 8 8 8 0s-8-8-8 0zM14 22c8 0 8 8 0 8" stroke="#b8862b" stroke-width="1.6"/>
+        <path d="M14 60V14h46" style="stroke:var(--vang)" stroke-width="1.4"/>
+        <path d="M22 14c0 8 8 8 8 0s-8-8-8 0zM14 22c8 0 8 8 0 8" style="stroke:var(--vang)" stroke-width="1.6"/>
         <path d="M30 22c6-6 14-4 14 3s-8 7-8 1 6-5 9-2"/>
         <path d="M22 30c-6 6-4 14 3 14s7-8 1-8-5 6-2 9"/>
       </g>
-      <circle cx="22" cy="22" r="3" fill="#8e1b1b"/>
+      <circle cx="22" cy="22" r="3" style="fill:var(--do)"/>
     </symbol>
   </defs>
 </svg>
@@ -228,15 +242,15 @@ window.GIA_PHA = {
     <div class="tien-so" id="tienSo"></div>
     <div class="que" id="que"></div>
     <svg class="hoa-van" viewBox="0 0 520 30" aria-hidden="true">
-      <g fill="none" stroke="#b8862b" stroke-width="1.6" stroke-linecap="round">
+      <g fill="none" style="stroke:var(--vang)" stroke-width="1.6" stroke-linecap="round">
         <path d="M10 15h170M340 15h170"/>
         <path d="M180 15c10-12 24-12 24 0s-14 10-14 2 8-6 10-2M340 15c-10-12-24-12-24 0s14 10 14 2-8-6-10-2"/>
       </g>
       <!-- hoa sen giữa -->
       <g transform="translate(260 16)">
-        <path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" fill="#8e1b1b"/>
-        <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" fill="#b8862b"/>
-        <path d="M-22 11h44" stroke="#8e1b1b" stroke-width="2"/>
+        <path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" style="fill:var(--do)"/>
+        <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" style="fill:var(--vang)"/>
+        <path d="M-22 11h44" style="stroke:var(--do)" stroke-width="2"/>
       </g>
     </svg>
     <div class="nguoi-lap">Người lập: <b id="nguoiLap"></b></div>
@@ -253,6 +267,8 @@ window.GIA_PHA = {
     <button onclick="doiCheDo('sach'); moIn()">🖨 In</button>
     <button class="truc-tuyen chinh" onclick="moGop()">✍ Góp thông tin</button>
     <button class="truc-tuyen" onclick="location.href=API_URL+'?trang=quantri'" title="Chỉ người lập gia phả">🔑 Duyệt</button>
+    <button onclick="location.href='huong-dan.html'">❓ Hướng dẫn</button>
+    <button onclick="doiMau()" title="Đổi bộ màu">🎨</button>
   </div>
   <div class="nhac-bam truc-tuyen">👆 Bấm vào tên một người để xem chi tiết, <b>📷 thêm ảnh</b>, bổ sung thông tin hoặc thêm con.</div>
   <div class="khung" id="khungCay"><div class="cay" id="cay"></div></div>
@@ -268,6 +284,7 @@ window.GIA_PHA = {
   </div>
   <section class="bang" id="bangGio"></section>
   <footer>✝ người đã khuất · viền xanh: nam · viền hồng: nữ · bấm vào tên để xem chi tiết</footer>
+  <div class="lien-he" id="lienHe"></div>
 </div>
 <div id="chiTiet"></div>
 
@@ -349,6 +366,8 @@ function batDau(DL) {
   document.getElementById("tienSo").textContent = DL.tien_so ? `(${DL.tien_so})` : "";
   document.getElementById("que").textContent = DL.que || "";
   document.getElementById("nguoiLap").textContent = DL.nguoi_lap || "";
+  veLienHe(DL);
+  window._DL = DL;
   document.getElementById("phuDe").textContent =
     `${ds.length} người · cập nhật ${DL.cap_nhat || ""} · ✅ BẢN NHÁP — thầy duyệt trước khi dùng`;
   daVe.clear(); veCay(); veDanhSach(); veBangGio(); dienMoc(); lapSach(DL); doiCheDo(cheDo);
@@ -420,8 +439,8 @@ function lapSach(DL) {
   const trangGio = giaDinh.length + 3;
   // Chân trang: số trang; khi in thêm tên gia phả, ngày cập nhật, ngày in
   const chan = so => `<div class="so-trang"><span class="chi-in">Gia phả họ ${esc(DL.ho || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in"></span> · </span>— ${so} —</div>`;
-  const sen = `<svg class="sen" viewBox="-30 -18 60 34" aria-hidden="true"><path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" fill="#8e1b1b"/>
-    <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" fill="#b8862b"/><path d="M-22 11h44" stroke="#8e1b1b" stroke-width="2"/></svg>`;
+  const sen = `<svg class="sen" viewBox="-30 -18 60 34" aria-hidden="true"><path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" style="fill:var(--do)"/>
+    <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" style="fill:var(--vang)"/><path d="M-22 11h44" style="stroke:var(--do)" stroke-width="2"/></svg>`;
   const gocBia = ["tt", "tp", "dt", "dp"].map(k => `<svg class="bia-goc ${k}"><use href="#goc"/></svg>`).join("");
   const soDong = giaDinh.filter(g => !g.moChi && g.doi === 1).length;
   const dauTrang = g => `<div class="dau-trang"><span>${esc(g.dong)}</span><span>${g.chi ? "Chi " + g.chi + " · " : ""}Đời ${g.doi}</span></div>`;
@@ -490,6 +509,14 @@ function lapSach(DL) {
   const el = document.getElementById("sach");
   el.innerHTML = html.join("");
   toSach = [...el.querySelectorAll(".to")];
+  // Trang của mỗi dòng họ mang màu riêng của dòng đó
+  const thuTu = {};
+  toSach.forEach(t => {
+    if (!t.dataset.chi) return;
+    const dong = t.dataset.chi.split("|")[0];
+    if (!(dong in thuTu)) thuTu[dong] = Object.keys(thuTu).length;
+    t.dataset.mau = mauDong(thuTu[dong]);
+  });
   document.getElementById("denTrang").innerHTML = toSach.map((t, i) => {
     const g = giaDinh[i - 2];
     const ten = i === 0 ? "Bìa trước" : i === 1 ? "Mục lục" : i === toSach.length - 1 ? "Bìa sau" : i === toSach.length - 2 ? "Lịch ngày giỗ" :
@@ -613,21 +640,52 @@ function veDanhSach() {
   };
   let html = "";
   const goc = layGoc(), nhieu = goc.length > 2;
+  let soDongDs = 0;
   [...goc, ...ds].forEach(g => {
     if (da.has(g.id)) return;
     da.add(g.id);
     const vc = g.vo_chong.map(coMa).filter(Boolean);
     const cu = new Set(vc.filter(q => da.has(q.id)).map(q => q.id));
     vc.forEach(q => da.add(q.id));
-    if (nhieu) html += `<h2 class="tieu-dong">${esc(tenDong(g, true))}</h2>`;
+    const mau = mauDong(soDongDs++);
+    if (nhieu) html += `<h2 class="tieu-dong" data-mau="${mau}">${esc(tenDong(g, true))}</h2>`;
     html += `<div class="dong-ng" style="text-align:center;margin:6px 0 10px" onclick="xem('${esc(g.id)}')">Đời 1: ${dong(g)}
       ${vc.map(q => `<span class="vc">${q.gioi === "nu" ? "Vợ" : "Chồng"}: ${cu.has(q.id) ? "↪ " : ""}${dong(q)}${cu.has(q.id) ? ' <span class="ph">· đã ghi ở dòng trên</span>' : ""}</span>`).join("")}</div>`;
     const tatCa = con(g), daCo = new Set(tatCa.filter(c => da.has(c.id)).map(c => c.id));
     // Mỗi người con của đời 1 là một chi, gập/mở được
-    html += tatCa.map((c, i) => `<details${tatCa.length <= 3 ? " open" : ""}><summary>Chi ${i + 1} · ${esc(c.ten)}</summary>
+    html += tatCa.map((c, i) => `<details data-mau="${mau}"${tatCa.length <= 3 ? " open" : ""}><summary>Chi ${i + 1} · ${esc(c.ten)}</summary>
       <ul><li>${daCo.has(c.id) ? tro(c) : mot(c, 2)}</li></ul></details>`).join("");
   });
   el.innerHTML = html;
+}
+
+// ---------- MÀU SẮC ----------
+// Bộ màu chính đổi theo ngày (mỗi ngày một màu), nút 🎨 đổi tay và nhớ trên máy này.
+// Dòng họ thứ k dùng bộ màu kế tiếp, để các dòng phân biệt mà vẫn hài hoà.
+const SO_BO_MAU = 4;
+let mauChinh = (() => {
+  try { const m = localStorage.getItem("giapha_mau"); if (m !== null) return +m % SO_BO_MAU; } catch (e) { /* không có bộ nhớ */ }
+  const d = new Date(); return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5) % SO_BO_MAU;
+})();
+const mauDong = k => (mauChinh + k) % SO_BO_MAU;
+document.body.dataset.mau = mauChinh;
+function doiMau() {
+  mauChinh = (mauChinh + 1) % SO_BO_MAU;
+  try { localStorage.setItem("giapha_mau", mauChinh); } catch (e) { /* bỏ qua */ }
+  document.body.dataset.mau = mauChinh;
+  const dang = trangHienTai;
+  daVe.clear(); veCay(); veDanhSach(); lapSach(window._DL || {}); moTrang(dang + 1);
+}
+
+// Chân trang liên hệ đơn vị thiết kế, in ấn (lấy từ trang «Thông tin» của bảng tính)
+function veLienHe(DL) {
+  const so = String(DL.dien_thoai || "").trim(), so_goi = so.replace(/[^\d+]/g, "");
+  document.getElementById("lienHe").innerHTML = DL.nguoi_lap ? `
+    <div class="dv">${esc(DL.nguoi_lap)}</div>
+    <div>${esc(DL.dich_vu || "")}</div>
+    <div>Thiết kế · In ấn · Trao sản phẩm · Giá cả hợp lý</div>
+    ${so ? `<a href="tel:${so_goi}">☎ ${esc(so)}</a><a href="https://zalo.me/${so_goi}" target="_blank" rel="noopener">💬 Zalo ${esc(so)}</a>` : ""}
+    <div class="nho">Nhận lập gia phả trực tuyến và in sách gia phả cho các dòng họ.</div>` : "";
 }
 
 function con(p) {
@@ -696,7 +754,8 @@ function veCay() {
   }
   let html = "";
   const goc = layGoc(), nhieu = goc.length > 2;   // một cặp vợ chồng gốc = 2 người
-  goc.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0, tenDong(p, nhieu)); });
+  let k = 0;
+  goc.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0, tenDong(p, nhieu)).replace("<li>", `<li data-mau="${mauDong(k++)}">`); });
   ds.forEach(p => { if (!daVe.has(p.id)) html += ve(p, 1, 0); });
   el.innerHTML = `<ul>${html}</ul>`;
 }
