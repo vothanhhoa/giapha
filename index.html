@@ -60,9 +60,23 @@
   .to .o-ng div{font-size:13px}
   .to table th{background:var(--do-dam)} .to table td,.to table th{font-size:13px;padding:4px 6px}
   .to .so-trang{text-align:center;font-size:12px;color:var(--phu);margin-top:12px}
-  .to.bia{display:flex;flex-direction:column;justify-content:center;text-align:center;background:var(--do);color:#f6e7c1;border:6px double var(--vang)}
-  .to.bia h2{color:#fff3d0;font-size:38px;margin:10px 0}
-  .to.bia .vien{border:1px solid var(--vang);padding:30px 14px;margin:8px}
+  .to.bia{display:flex;flex-direction:column;justify-content:center;text-align:center;background:var(--do);color:#f6e7c1;border:6px double var(--vang);overflow:hidden}
+  .to.bia h2{color:#fff3d0;font-size:40px;line-height:1.15;margin:8px 0;font-family:"Times New Roman",serif}
+  .to.bia .vien{border:1px solid var(--vang);padding:30px 14px;margin:18px}
+  .to.bia .cau{font-style:italic;font-family:"Times New Roman",serif;font-size:17px}
+  .to.bia .sen{width:90px;height:52px;display:block;margin:10px auto 0}
+  .to.bia .tien-so-bia{font-style:italic;font-size:18px;font-family:"Times New Roman",serif}
+  .to.bia .que-bia{margin-top:4px;font-size:16px}
+  .to.bia .hoa{margin:22px 0 6px;font-size:22px;color:var(--vang-nhat)}
+  .to.bia .nho-bia{font-size:13px;margin-top:4px}
+  .to.bia .cau-lon{font-family:"Times New Roman",serif;font-style:italic;font-size:22px;line-height:1.5;margin:14px 0 4px}
+  .bia-goc{position:absolute;width:64px;height:64px}
+  .bia-goc.tt{top:10px;left:10px}.bia-goc.tp{top:10px;right:10px;transform:scaleX(-1)}
+  .bia-goc.dt{bottom:10px;left:10px;transform:scaleY(-1)}.bia-goc.dp{bottom:10px;right:10px;transform:scale(-1,-1)}
+  .chi-in{display:none} .to.trang-trang{display:none}
+  .chon-in{display:block;padding:8px 10px;margin:6px 0;border:1px solid var(--vang-nhat);border-radius:8px;background:#fff;font-size:14px;color:var(--chu)}
+  .chon-in select{margin-top:6px;width:100%}
+  .hop .chon-in input{width:auto;margin:0 6px 0 0;vertical-align:-2px}
   .to.mo-chi{display:flex;flex-direction:column;justify-content:center;text-align:center}
   .to.mo-chi h3{font-size:28px}
   .to .muc{display:flex;gap:6px;font-size:13px;cursor:pointer}.to .muc .cham{flex:1;border-bottom:1px dotted var(--vang)}
@@ -154,8 +168,16 @@
     .to{position:static;transform:none!important;box-shadow:none;border:0;border-radius:0;overflow:visible;background:#fff;
         padding:0;break-after:page;page-break-after:always;font-size:12.5pt}
     .to:last-child{break-after:auto;page-break-after:auto}
-    .to.bia{min-height:250mm;background:#fff;color:var(--do-dam);border:4px double var(--do)}
-    .to.bia h2{color:var(--do)}
+    .to.bia{position:relative;height:268mm;display:flex;background:#fff!important;color:var(--do-dam);border:5px double var(--do);
+            -webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+    .to.bia h2{color:var(--do);font-size:54px}
+    .to.bia .hoa{color:var(--vang)}
+    .to.bia .vien{border-color:var(--vang);padding:60px 20px}
+    .chi-in{display:inline}
+    .to.bo-in{display:none!important}
+    .to.trang-trang{display:block!important;height:1px;visibility:hidden}
+    .to.muc-luc .cot-muc{column-count:2;column-gap:8mm;font-size:10pt}
+    .to.muc-luc .muc{break-inside:avoid}
     .to.mo-chi{min-height:250mm}
     th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
@@ -228,7 +250,7 @@ window.GIA_PHA = {
     <button class="nut-cay" onclick="thuPhong(0.1)">＋</button>
     <button class="nut-cay" onclick="thuPhong(-0.1)">－</button>
     <button class="nut-cay" onclick="thuPhong(0)">Vừa khung</button>
-    <button onclick="window.print()">🖨 In</button>
+    <button onclick="doiCheDo('sach'); moIn()">🖨 In</button>
     <button class="truc-tuyen chinh" onclick="moGop()">✍ Góp thông tin</button>
     <button class="truc-tuyen" onclick="location.href=API_URL+'?trang=quantri'" title="Chỉ người lập gia phả">🔑 Duyệt</button>
   </div>
@@ -248,6 +270,19 @@ window.GIA_PHA = {
   <footer>✝ người đã khuất · viền xanh: nam · viền hồng: nữ · bấm vào tên để xem chi tiết</footer>
 </div>
 <div id="chiTiet"></div>
+
+<div id="manIn" class="man" onclick="if(event.target===this)dongIn()">
+  <div class="hop">
+    <h2>🖨 In gia phả</h2>
+    <label class="chon-in"><input type="radio" name="phamvi" value="tat" checked> <b>Cả cuốn</b>: bìa trước, mục lục, mọi dòng, lịch giỗ, bìa sau</label>
+    <label class="chon-in"><input type="radio" name="phamvi" value="chi"> <b>Một chi</b> (kèm bìa trước, bìa sau):<br><select id="chonChi"></select></label>
+    <label class="chon-in"><input type="radio" name="phamvi" value="trang"> <b>Trang đang xem</b>: <span id="tenTrangIn"></span></label>
+    <label class="chon-in"><input type="checkbox" id="haiMat"> <b>In 2 mặt giấy</b>: tự thêm trang trắng để bìa và đầu mỗi dòng họ nằm ở mặt phải khi đóng quyển</label>
+    <p class="nho" style="text-align:left">Khổ A4 đứng, lề trong 2,2 cm để đóng gáy. Mỗi trang ghi ngày cập nhật và ngày in.
+      Ở hộp in của máy: chọn máy in hoặc <b>«Lưu dưới dạng PDF»</b>, bỏ chọn <b>«Đầu trang và chân trang»</b>, bật <b>«Đồ họa nền»</b> để in màu khung.</p>
+    <div class="nut"><button type="button" onclick="dongIn()">Đóng</button><button type="button" class="chinh" onclick="batDauIn()">🖨 In</button></div>
+  </div>
+</div>
 
 <div id="manGop" class="man" onclick="if(event.target===this)dongGop()">
   <form class="hop" onsubmit="guiGop(event)">
@@ -383,17 +418,25 @@ function lapSach(DL) {
   const trangCua = {};   // mã người → trang gia đình có người đó
   giaDinh.forEach((g, i) => { g.trang = i + 3; if (!g.moChi) { trangCua[g.p.id] = g.trang; g.vc.forEach(q => { trangCua[q.id] = trangCua[q.id] || g.trang; }); } });
   const trangGio = giaDinh.length + 3;
+  // Chân trang: số trang; khi in thêm tên gia phả, ngày cập nhật, ngày in
+  const chan = so => `<div class="so-trang"><span class="chi-in">Gia phả họ ${esc(DL.ho || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in"></span> · </span>— ${so} —</div>`;
+  const sen = `<svg class="sen" viewBox="-30 -18 60 34" aria-hidden="true"><path d="M0-13c7 6 7 16 0 22-7-6-7-16 0-22z" fill="#8e1b1b"/>
+    <path d="M-3 9c-12-1-18-9-17-17 9 1 14 8 17 17zM3 9c12-1 18-9 17-17-9 1-14 8-17 17z" fill="#b8862b"/><path d="M-22 11h44" stroke="#8e1b1b" stroke-width="2"/></svg>`;
+  const gocBia = ["tt", "tp", "dt", "dp"].map(k => `<svg class="bia-goc ${k}"><use href="#goc"/></svg>`).join("");
+  const soDong = giaDinh.filter(g => !g.moChi && g.doi === 1).length;
   const dauTrang = g => `<div class="dau-trang"><span>${esc(g.dong)}</span><span>${g.chi ? "Chi " + g.chi + " · " : ""}Đời ${g.doi}</span></div>`;
   const html = [];
-  html.push(`<div class="to bia"><div class="vien">
-    <div style="font-style:italic">Uống nước nhớ nguồn</div>
-    <h2>Gia phả họ ${esc(DL.ho || "")}</h2>
-    <div style="font-style:italic;font-size:17px">${DL.tien_so ? "(" + esc(DL.tien_so) + ")" : ""}</div>
-    <div style="margin-top:6px">${esc(DL.que || "")}</div>
-    <div style="margin:26px 0 4px;font-size:22px">❀ ❀ ❀</div>
+  html.push(`<div class="to bia">${gocBia}<div class="vien">
+    <div class="cau">Uống nước nhớ nguồn</div>
+    ${sen}
+    <h2>Gia phả<br>họ ${esc(DL.ho || "")}</h2>
+    <div class="tien-so-bia">${DL.tien_so ? "(" + esc(DL.tien_so) + ")" : ""}</div>
+    <div class="que-bia">${esc(DL.que || "")}</div>
+    <div class="hoa">❀ ❀ ❀</div>
     <div>Người lập: <b>${esc(DL.nguoi_lap || "")}</b></div>
-    <div style="font-size:13px;margin-top:6px">${ds.length} người · cập nhật ${esc(DL.cap_nhat || "")}</div>
-    <div style="font-size:12px;margin-top:18px;opacity:.85">✅ BẢN NHÁP — thầy duyệt trước khi dùng</div></div></div>`);
+    <div class="nho-bia">${ds.length} người · ${soDong} dòng · cập nhật ${esc(DL.cap_nhat || "")}</div>
+    <div class="nho-bia">In ngày: <span class="ngay-in">—</span></div>
+    <div class="nho-bia" style="margin-top:14px">✅ BẢN NHÁP — thầy duyệt trước khi dùng</div></div></div>`);
   let ml = "";
   giaDinh.forEach(g => {
     if (g.moChi) ml += `<div class="muc cap2" onclick="moTrang(${g.trang})"><span>Chi ${g.chi} · ${esc(g.nguoi.ten)}</span><span class="cham"></span><span>${g.trang}</span></div>`;
@@ -401,30 +444,30 @@ function lapSach(DL) {
     else ml += `<div class="muc cap3" onclick="moTrang(${g.trang})"><span>Đời ${g.doi} · Gia đình ${esc(g.p.ten)}</span><span class="cham"></span><span>${g.trang}</span></div>`;
   });
   ml += `<div class="muc cap1" onclick="moTrang(${trangGio})"><span>Lịch ngày giỗ</span><span class="cham"></span><span>${trangGio}</span></div>`;
-  html.push(`<div class="to"><h3>Mục lục</h3>${ml}<div class="so-trang">— 2 —</div></div>`);
+  html.push(`<div class="to muc-luc"><h3>Mục lục</h3><div class="cot-muc">${ml}</div>${chan(2)}</div>`);
   giaDinh.forEach(g => {
     if (g.moChi) {
       const trong = giaDinh.filter(x => !x.moChi && x.dong === g.dong && x.chi === g.chi);
-      html.push(`<div class="to mo-chi"><div class="dau-trang"><span>${esc(g.dong)}</span><span></span></div>
+      html.push(`<div class="to mo-chi" data-chi="${esc(g.dong)}|${g.chi}"><div class="dau-trang"><span>${esc(g.dong)}</span><span></span></div>
         <h3>Chi ${g.chi}</h3><div style="font-size:18px">${esc(g.nguoi.ten)}</div>
         <div style="margin:14px auto 0;font-size:13px;color:var(--phu)">${trong.length ? trong.length + " gia đình · từ trang " + trong[0].trang
           : trangCua[g.nguoi.id] ? "Gia đình ghi ở dòng bên " + (g.nguoi.gioi === "nu" ? "chồng" : "vợ") + ", trang " + trangCua[g.nguoi.id]
           : "Chưa ghi gia đình riêng"}</div>
         ${!trong.length && !trangCua[g.nguoi.id] ? `<div style="max-width:300px;margin:12px auto 0;text-align:left">${oNguoi(g.nguoi, trangCua)}</div>` : ""}
-        <div class="so-trang">— ${g.trang} —</div></div>`);
+        ${chan(g.trang)}</div>`);
       return;
     }
     const {p, vc} = g;
     const cac = con(p);
     const tieuDe = `Gia đình ${p.gioi === "nu" ? "bà" : "ông"} ${esc(p.ten)}${vc.length ? " – " + vc.map(q => (q.gioi === "nu" ? "bà " : "ông ") + esc(q.ten)).join(", ") : ""}`;
-    html.push(`<div class="to">${dauTrang(g)}<h3>${tieuDe}</h3>
+    html.push(`<div class="to${g.doi === 1 ? " dau-dong" : ""}" data-chi="${esc(g.dong)}|${g.chi || 0}">${dauTrang(g)}<h3>${tieuDe}</h3>
       <div class="hai">${oNguoi(p, trangCua)}${vc.map(q => oNguoi(q, trangCua)).join("")}</div>
       ${cac.length ? `<h4>Các con (${cac.length})</h4><table><tr><th>#</th><th>Họ tên</th><th>Năm sinh</th><th>Ghi chú</th></tr>
         ${cac.map((c, i) => `<tr><td>${i + 1}</td><td>${daMat(c) ? "✝ " : ""}${esc(c.ten)}</td><td>${nam(c.sinh) || ""}</td>
           <td>${[c.mat || (daMat(c) ? "đã mất" : ""), c.ngay_gio ? "giỗ " + esc(c.ngay_gio) + " ÂL" : "",
                  trangCua[c.id] && trangCua[c.id] !== g.trang ? "gia đình riêng: tr. " + trangCua[c.id] : ""].filter(Boolean).join(" · ")}</td></tr>`).join("")}
         </table>` : `<div style="margin-top:10px;color:var(--phu)">Chưa ghi con.</div>`}
-      <div class="so-trang">— ${g.trang} —</div></div>`);
+      ${chan(g.trang)}</div>`);
   });
   const gio = ds.filter(p => p.ngay_gio).sort((a, b) => {
     const [da_, ma] = String(a.ngay_gio).split("/").map(Number), [db, mb] = String(b.ngay_gio).split("/").map(Number);
@@ -433,18 +476,80 @@ function lapSach(DL) {
   html.push(`<div class="to"><h3>Lịch ngày giỗ (âm lịch)</h3>
     <table><tr><th>Ngày giỗ</th><th>Người đã khuất</th><th>Năm mất</th><th>Trang</th></tr>
     ${gio.map(p => `<tr><td><b>${esc(p.ngay_gio)}</b></td><td>${esc(p.ten)}</td><td>${nam(p.mat) || "?"}</td><td>${trangCua[p.id] || ""}</td></tr>`).join("")}</table>
-    <div class="so-trang">— ${trangGio} —</div></div>`);
+    ${chan(trangGio)}</div>`);
+  html.push(`<div class="to bia bia-sau">${gocBia}<div class="vien">
+    ${sen}
+    <div class="cau-lon">Cây có cội, nước có nguồn<br>Chim có tổ, người có tông</div>
+    <div class="hoa">❀</div>
+    <div><b>Gia phả họ ${esc(DL.ho || "")}</b>${DL.tien_so ? " · " + esc(DL.tien_so) : ""}</div>
+    <div>${esc(DL.que || "")}</div>
+    <div class="nho-bia">${ds.length} người · ${soDong} dòng</div>
+    <div class="nho-bia">Người lập: ${esc(DL.nguoi_lap || "")} · cập nhật ${esc(DL.cap_nhat || "")} · in ngày <span class="ngay-in">—</span></div>
+    <div class="nho-bia" style="margin-top:14px">Xem và góp thông tin bản mới nhất:<br><b>vothanhhoa.github.io/giapha</b></div>
+    <div class="nho-bia" style="margin-top:10px;font-style:italic">Con cháu giữ gìn, bổ sung cho các đời sau.</div></div></div>`);
   const el = document.getElementById("sach");
   el.innerHTML = html.join("");
   toSach = [...el.querySelectorAll(".to")];
   document.getElementById("denTrang").innerHTML = toSach.map((t, i) => {
     const g = giaDinh[i - 2];
-    const ten = i === 0 ? "Bìa" : i === 1 ? "Mục lục" : i === toSach.length - 1 ? "Lịch ngày giỗ" :
+    const ten = i === 0 ? "Bìa trước" : i === 1 ? "Mục lục" : i === toSach.length - 1 ? "Bìa sau" : i === toSach.length - 2 ? "Lịch ngày giỗ" :
       g.moChi ? `Chi ${g.chi} · ${g.nguoi.ten}` : g.doi === 1 ? g.dong : `Đời ${g.doi} · ${g.p.ten}`;
     return `<option value="${i + 1}">Trang ${i + 1} · ${esc(ten)}</option>`;
   }).join("");
   moTrang(Math.min(trangHienTai + 1, toSach.length) || 1);
+  // Danh sách chi để in riêng
+  document.getElementById("chonChi").innerHTML = giaDinh.filter(g => g.moChi)
+    .map(g => `<option value="${esc(g.dong)}|${g.chi}">${esc(g.dong.replace(/ · .*/, ""))} · Chi ${g.chi} · ${esc(g.nguoi.ten)}</option>`).join("");
 }
+
+// ---------- IN ----------
+const homNay = () => { const d = new Date(); return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`; };
+const ghiNgayIn = () => document.querySelectorAll(".ngay-in").forEach(s => { s.textContent = homNay(); });
+window.addEventListener("beforeprint", ghiNgayIn);   // Ctrl + P cũng có ngày in
+function moIn() {
+  const t = toSach[trangHienTai];
+  document.getElementById("tenTrangIn").textContent = `trang ${trangHienTai + 1}` +
+    (t ? " · " + (t.querySelector("h3,h2")?.innerText || "").replace(/\s+/g, " ").trim() : "");
+  document.getElementById("manIn").classList.add("mo");
+}
+function dongIn() { document.getElementById("manIn").classList.remove("mo"); }
+function batDauIn() {
+  const pv = document.querySelector('input[name="phamvi"]:checked').value, haiMat = document.getElementById("haiMat").checked;
+  const n = toSach.length, giu = new Set();
+  if (pv === "tat") toSach.forEach((t, i) => giu.add(i));
+  else if (pv === "trang") giu.add(trangHienTai);
+  else {
+    const chi = document.getElementById("chonChi").value;
+    giu.add(0); giu.add(n - 1);
+    toSach.forEach((t, i) => { if (t.dataset.chi === chi) giu.add(i); });
+  }
+  toSach.forEach((t, i) => t.classList.toggle("bo-in", !giu.has(i)));
+  // In 2 mặt để đóng quyển: mặt sau bìa trước để trắng, trang đầu dòng/chi ở mặt phải (trang lẻ),
+  // bìa sau rơi vào mặt cuối (trang chẵn)
+  if (haiMat && pv !== "trang") {
+    let vt = 0;
+    const chen = truoc => { const b = document.createElement("div"); b.className = "to trang-trang"; truoc.parentNode.insertBefore(b, truoc); vt++; };
+    toSach.forEach((t, i) => {
+      if (!giu.has(i)) return;
+      if (i === n - 1) { if ((vt + 1) % 2 === 1) chen(t); }
+      else if (i > 0 && t.classList.contains("dau-dong") && (vt + 1) % 2 === 0) chen(t);
+      vt++;
+      if (i === 0) { const sau = toSach.find((x, j) => j > 0 && giu.has(j)); if (sau) chen(sau); }
+    });
+  }
+  const le = document.createElement("style");
+  le.id = "leIn";
+  le.textContent = haiMat && pv !== "trang"
+    ? "@page{size:A4;margin:14mm 12mm 12mm 22mm}@page :left{margin-left:12mm;margin-right:22mm}@page :right{margin-left:22mm;margin-right:12mm}"
+    : "@page{size:A4;margin:14mm 12mm 12mm 22mm}";
+  document.head.appendChild(le);
+  ghiNgayIn(); dongIn();
+  setTimeout(() => window.print(), 50);
+}
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll(".trang-trang,#leIn").forEach(x => x.remove());
+  toSach.forEach(t => t.classList.remove("bo-in"));
+});
 function moTrang(so) {
   trangHienTai = Math.max(0, Math.min(toSach.length - 1, so - 1));
   const n = toSach.length;
