@@ -133,6 +133,10 @@
   .o-mic{display:flex;gap:4px;align-items:center}.o-mic>input,.o-mic>textarea{flex:1}
   .mic{padding:6px 9px;font-size:15px;line-height:1;flex:none}
   .hop .ke .nho{margin:4px 0 0;text-align:left}
+  .xem-anh{max-width:160px;max-height:200px;border-radius:8px;border:2px solid var(--vang);display:block;margin:6px auto}
+  .anh-nho{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--vang);display:block;margin:0 auto 3px}
+  .anh-ct{width:120px;height:150px;object-fit:cover;border-radius:8px;border:2px solid var(--vang);float:right;margin:0 0 6px 10px}
+  .to .anh-so{width:70px;height:88px;object-fit:cover;border-radius:6px;border:1px solid var(--vang);float:right;margin:0 0 4px 6px}
   .dang-tai{text-align:center;color:var(--phu);padding:30px}
   footer{text-align:center;font-size:12px;color:var(--phu);margin-top:10px}
   @media (max-width:640px){header{padding:4px 30px 0}h1{font-size:30px}.goc{width:46px;height:46px}}
@@ -255,8 +259,14 @@ window.GIA_PHA = {
         <option value="them_con">Thêm con của</option>
         <option value="them_vc">Thêm vợ/chồng của</option>
         <option value="sua">Sửa, bổ sung thông tin của</option>
+        <option value="anh">📷 Thêm ảnh của</option>
       </select>
       <select name="moc" required></select>
+    </div>
+    <div id="oAnh" class="an">
+      <label>Chọn ảnh chân dung (chụp mới hoặc lấy trong máy)<input type="file" name="tep" accept="image/*" onchange="xemTruocAnh(this)"></label>
+      <img id="xemAnh" class="xem-anh an" alt="">
+      <div class="nho">Ảnh tự thu nhỏ trước khi gửi. Ảnh chỉ hiện trên trang sau khi người lập gia phả duyệt; ai có địa chỉ trang đều xem được.</div>
     </div>
     <label>Họ tên (chỉ nhớ tên cũng được)<input name="ten" maxlength="80"></label>
     <div class="hang">
@@ -327,7 +337,7 @@ const gt = (lbl, v) => v ? `<div>${lbl}: ${esc(v)}</div>` : "";
 function oNguoi(p, trangCua) {
   const cm = [coMa(p.cha), coMa(p.me)].filter(Boolean);
   const tCm = cm.length && trangCua[cm[0].id] ? ` (tr. ${trangCua[cm[0].id]})` : "";
-  return `<div class="o-ng ${p.gioi === "nu" ? "nu" : ""}"><b>${daMat(p) ? "✝ " : ""}${esc(p.ten)}</b>
+  return `<div class="o-ng ${p.gioi === "nu" ? "nu" : ""}">${p.anh ? `<img class="anh-so" src="${urlAnh(p.anh)}" alt="">` : ""}<b>${daMat(p) ? "✝ " : ""}${esc(p.ten)}</b>
     ${p.quan_he ? `<div style="color:var(--do);font-style:italic">${esc(p.quan_he)}</div>` : ""}
     ${gt("Sinh", p.sinh)}${gt("Mất", p.mat || (daMat(p) && !p.mat ? "đã mất" : ""))}${gt("Giỗ (âm lịch)", p.ngay_gio)}
     ${cm.length ? `<div>Con của: ${cm.map(x => esc(x.ten)).join(" – ")}${tCm}</div>` : ""}
@@ -458,9 +468,10 @@ function latTrang(b) { moTrang(trangHienTai + 1 + b); }
 })();
 
 function layGoc() {
-  // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ
-  const laGoc = p => !coMa(p.cha) && !coMa(p.me) &&
-    !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me)));
+  // Gốc: không có cha mẹ trong dữ liệu, và không phải dâu/rể của người đã có cha mẹ.
+  // Người có ô «thu» (đánh số dòng) luôn là gốc: VD cụ Võ Văn Cưng vẫn đứng đầu dòng họ Võ dù cụ bà đã có cha.
+  const laGoc = p => !coMa(p.cha) && !coMa(p.me) && (p.thu ||
+    !p.vo_chong.some(m => coMa(m) && (coMa(theoMa[m].cha) || coMa(theoMa[m].me))));
   // Ô «thu» của người đứng đầu dòng = thứ tự dòng (nội 1, ngoại 2, bên vợ 3…)
   return ds.filter(laGoc).sort((a, b) => (a.thu || 99) - (b.thu || 99) ||
     (a.gioi === "nu") - (b.gioi === "nu") || (nam(a.sinh) || 9999) - (nam(b.sinh) || 9999));
@@ -521,6 +532,7 @@ function the(p, doi) {
   const ns = nam(p.sinh), nm = nam(p.mat);
   const khoang = ns || nm ? `${ns || "?"} – ${daMat(p) ? (nm || "?") : ""}` : "";
   return `<div class="nguoi ${p.gioi === "nu" ? "nu" : "nam"} ${daMat(p) ? "da-mat" : ""}" onclick="xem('${esc(p.id)}')">
+    ${p.anh ? `<img class="anh-nho" src="${urlAnh(p.anh, 120)}" alt="" loading="lazy">` : ""}
     <div class="ten">${daMat(p) ? "✝ " : ""}${esc(p.ten || p.id)}</div>
     ${khoang ? `<div class="nam-sinh">${khoang}</div>` : ""}
     ${p.ngay_gio ? `<div class="gio">🕯 Giỗ ${esc(p.ngay_gio)} ÂL</div>` : ""}
@@ -600,14 +612,14 @@ function xem(id) {
   const p = theoMa[id], k = document.getElementById("chiTiet");
   const ten = m => theoMa[m]?.ten || "";
   const dong = (nhan, gt) => gt ? `<div>${nhan}: ${esc(gt)}</div>` : "";
-  k.innerHTML = `<b>${esc(p.ten)}</b>${p.quan_he ? ` <i>(${esc(p.quan_he)})</i>` : ""}
+  k.innerHTML = `${p.anh ? `<img class="anh-ct" src="${urlAnh(p.anh)}" alt="">` : ""}<b>${esc(p.ten)}</b>${p.quan_he ? ` <i>(${esc(p.quan_he)})</i>` : ""}
     ${dong("Sinh", p.sinh)}${dong("Mất", p.mat)}${dong("Giỗ", p.ngay_gio && p.ngay_gio + " âm lịch")}
     ${dong("Cha", ten(p.cha))}${dong("Mẹ", ten(p.me))}
     ${dong("Vợ/chồng", p.vo_chong.map(ten).join(", "))}
     ${dong("Con", con(p).map(c => c.ten).join(", "))}
     ${dong("Quê / nơi ở", p.que)}${dong("Mộ phần", p.mo)}${dong("Ghi chú", p.ghi_chu)}
     <div style="text-align:right;margin-top:6px">
-      ${API_URL ? `<button onclick="moGop('sua','${esc(p.id)}')">✍ Bổ sung</button> <button onclick="moGop('them_con','${esc(p.id)}')">＋ Thêm con</button> ` : ""}
+      ${API_URL ? `<button onclick="moGop('sua','${esc(p.id)}')">✍ Bổ sung</button> <button onclick="moGop('them_con','${esc(p.id)}')">＋ Thêm con</button> <button onclick="moGop('anh','${esc(p.id)}')">📷 Ảnh</button> ` : ""}
       <button onclick="this.parentNode.parentNode.style.display='none'">Đóng</button></div>`;
   k.style.display = "block";
 }
@@ -632,10 +644,43 @@ function dienMoc() {
   if (cu) s.value = cu;
 }
 function doiLoai() {
-  const f = form();
-  f.ten.required = f.loai.value !== "sua";
+  const f = form(), anh = f.loai.value === "anh";
+  f.ten.required = f.loai.value !== "sua" && !anh;
   f.ten.placeholder = f.loai.value === "sua" ? "Chỉ ghi nếu muốn sửa tên" : "";
+  // Gửi ảnh: chỉ cần chọn người, chọn ảnh, ghi chú và tên người gửi
+  document.getElementById("oAnh").classList.toggle("an", !anh);
+  document.querySelector("#manGop .ke").classList.toggle("an", anh);
+  ["ten", "gioi", "thu", "sinh", "mat", "ngay_gio", "da_mat", "que", "mo"].forEach(k => {
+    const o = f[k], khoi = o.closest(".hang") || o.closest("label");
+    khoi.classList.toggle("an", anh);
+  });
 }
+// Ảnh chụp điện thoại rất nặng: thu về cạnh dài 900px, JPEG, trước khi gửi
+function thuNhoAnh(tep) {
+  return new Promise((xong, hong) => {
+    const doc = new FileReader();
+    doc.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const tl = Math.min(1, 900 / Math.max(im.width, im.height)), c = document.createElement("canvas");
+        c.width = Math.round(im.width * tl); c.height = Math.round(im.height * tl);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+        xong(c.toDataURL("image/jpeg", 0.82));
+      };
+      im.onerror = () => hong(new Error("Không đọc được ảnh này, xin chọn ảnh khác."));
+      im.src = doc.result;
+    };
+    doc.onerror = () => hong(new Error("Không đọc được tệp."));
+    doc.readAsDataURL(tep);
+  });
+}
+async function xemTruocAnh(o) {
+  const x = document.getElementById("xemAnh");
+  if (!o.files[0]) { x.classList.add("an"); return; }
+  try { x.src = await thuNhoAnh(o.files[0]); x.classList.remove("an"); } catch (err) { alert(err.message); }
+}
+// Ảnh đã duyệt nằm trên Google Drive (ai có đường liên kết đều xem được)
+const urlAnh = (id, co = 400) => `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${co}`;
 function moGop(loai, moc) {
   if (!ds.length) { alert("Cây chưa có ai để làm mốc. Xin liên hệ người lập gia phả."); return; }
   const f = form(); f.reset(); document.getElementById("kqGop").textContent = "";
@@ -658,13 +703,19 @@ async function guiGop(e) {
   dungNghe();
   nut.disabled = true; kq.textContent = "Đang gửi…"; kq.style.color = "";
   try {
+    const goi = {loai: f.loai.value, moc: f.moc.value, nguoi, nguoi_gui: f.nguoi_gui.value, bay: f.bay.value};
+    if (goi.loai === "anh") {
+      if (!f.tep.files[0]) throw new Error("Xin chọn ảnh trước khi gửi.");
+      goi.anh = await thuNhoAnh(f.tep.files[0]);
+      goi.nguoi = nguoi.ghi_chu ? {ghi_chu: nguoi.ghi_chu} : {};
+    }
     // text/plain để Google nhận thẳng, không cần hỏi trước
-    const r = await fetch(API_URL, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"},
-      body: JSON.stringify({loai: f.loai.value, moc: f.moc.value, nguoi, nguoi_gui: f.nguoi_gui.value, bay: f.bay.value})});
+    const r = await fetch(API_URL, {method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify(goi)});
     const d = await r.json();
     if (!d.ok) throw new Error(d.loi);
     kq.style.color = "#2e7d32"; kq.textContent = "✅ Đã gửi. Cảm ơn! Thông tin sẽ hiện sau khi được duyệt.";
     const gui = f.nguoi_gui.value; f.reset(); f.nguoi_gui.value = gui; doiLoai();
+    document.getElementById("xemAnh").classList.add("an");
   } catch (err) {
     kq.style.color = "#8e1b1b"; kq.textContent = "⚠ " + (err.message || "Không gửi được, xin thử lại.");
   } finally { nut.disabled = false; }
